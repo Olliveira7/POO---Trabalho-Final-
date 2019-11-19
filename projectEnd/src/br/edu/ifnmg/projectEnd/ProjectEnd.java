@@ -5,6 +5,7 @@
  */
 package br.edu.ifnmg.projectEnd;
 
+
 /**
  *
  * @author Diego
@@ -15,7 +16,12 @@ public class ProjectEnd {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        Client p1 = new Client();
+        p1.setName("Diego");
+        p1.setCpf("123.123.234.23");
+        p1.setNumber("170");
+        p1.toString();
     }
     
 }
