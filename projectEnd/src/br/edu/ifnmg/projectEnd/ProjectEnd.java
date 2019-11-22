@@ -8,6 +8,8 @@ package br.edu.ifnmg.projectEnd;
 
 import br.edu.ifnmg.projectEnd.percistence.Database;
 import br.edu.ifnmg.projectEnd.percistence.repository_client;
+import java.util.ArrayList;
+import java.util.List;
 public class ProjectEnd {
 
     /**
@@ -15,10 +17,17 @@ public class ProjectEnd {
      */
     public static void main(String[] args) {
         
-        Client client = new Client();
-        
-        repository_client repo = new repository_client();
-        repo.Delete(4);
+//        Client client = new Client();
+//        client.setCpf("111.222.333-40");
+//        client.setEmail("diego.oli");
+//        client.setName("diego");
+//        client.setNeighborhood("eldorado");
+//        client.setNumber("170");
+//        client.setStreet("I");
+//        List<Client> clients = new ArrayList<>();
+          repository_client repo = new repository_client();
+          repo.SalvaTelephoneUni(2,"(38)99918777");
+//        clients = repo.SeacheList(client);
 //        System.out.println(client.toString());
         
 //        client.setCpf("111.222.333-40");
@@ -31,6 +40,10 @@ public class ProjectEnd {
 //        repo.Save(client);
 //        
 //        System.out.println(client.getId());
+
+//        for (Client u : clients){
+//            System.out.println(u.toString());
+//        }
     }
     
 }
