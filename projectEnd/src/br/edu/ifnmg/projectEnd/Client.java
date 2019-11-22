@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Client {
+    private int id;
     private String name;
     private String cpf;
     private String email;
@@ -19,6 +20,7 @@ public class Client {
     private String number_house;
 
     public Client(){
+        this.id = 0;
         this.name = "";
         this.cpf = "";
         this.email = "";
@@ -26,6 +28,14 @@ public class Client {
         this.number_house = "";
         this.street = "";
         this.telefones = new ArrayList<String>();
+    }
+    
+    public int getId(){
+        return this.id;
+    }
+    
+    public void setId(int newId){
+        this.id = newId;
     }
     
     public String getName(){
