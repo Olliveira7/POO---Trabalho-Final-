@@ -14,7 +14,7 @@ public class Provider {
     private String Cnpj;
     private String name;
     private String reason_social;
-    private List<String> telefones;
+    private List<String> telephones;
     private String neighborhood;
     private String street;
     private String number_provider;
@@ -24,7 +24,7 @@ public class Provider {
         this.Cnpj = "";
         this.email = "";
         this.name = "";
-        this.telefones = new ArrayList<String>();
+        this.telephones = new ArrayList<String>();
         this.reason_social = "";
         this.neighborhood = "";
         this.number_provider = "";
@@ -87,14 +87,19 @@ public class Provider {
         this.number_provider = newNumber;
     }
     
-    public void addTelefone(String telefone){
-        if(telefone.length() == 11 && telefone != null)
-            this.telefones.add(telefone);
+    public void addTelephone(String telephone){
+        if(telephone.length() == 11 && telephone != null)
+            this.telephones.add(telephone);
     }
     
     public void removeTelefone(String telefone){
-        if(this.telefones.contains(telefone))
-            this.telefones.remove(telefone);
+        if(this.telephones.contains(telefone))
+            this.telephones.remove(telefone);
+    }
+
+    @Override
+    public String toString() {
+        return "Provider{" + "Cnpj=" + Cnpj + ", name=" + name + ", reason_social=" + reason_social + ", telephones=" + telephones + ", neighborhood=" + neighborhood + ", street=" + street + ", number_provider=" + number_provider + ", email=" + email + '}';
     }
     
     

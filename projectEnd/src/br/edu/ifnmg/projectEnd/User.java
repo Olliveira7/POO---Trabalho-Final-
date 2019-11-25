@@ -6,20 +6,30 @@ import java.util.List;
 import java.util.Objects;
 
 public class User {
+    private int id;
     private String cpf;
     private String name;
-    private List<String> telefones;
+    private List<String> telephones;
     private String sexo;
     private String user;
     private String password;
     
     public User(){
+        this.id = 0;
         this.cpf = "";
         this.name = "";
         this.password = "";
         this.sexo = "";
-        this.telefones = new ArrayList<String>();
+        this.telephones = new ArrayList<String>();
         this.user = "";
+    }
+    
+    public int getId(){
+        return this.id;
+    }
+    
+    public void setId(int newId){
+        this.id = newId;
     }
     
     public String getCpf(){
@@ -54,14 +64,22 @@ public class User {
         this.sexo = newSexo;
     }
     
-    public void addTelefone(String newTelefone){
-        if(newTelefone != null && newTelefone.length() == 11)
-            this.telefones.add(newTelefone);
+    public String getUser(){
+        return this.user;
     }
     
-    public void removeTelefone(String newTelefone){
-        if(this.telefones.contains(newTelefone))
-            this.telefones.remove(newTelefone);
+    public void setUser(String newUser){
+        this.user = newUser;
+    }
+    
+    public void addTelephone(String newTelephone){
+        if(newTelephone != null && newTelephone.length() == 11)
+            this.telephones.add(newTelephone);
+    }
+    
+    public void removeTelephone(String newTelephone){
+        if(this.telephones.contains(newTelephone))
+            this.telephones.remove(newTelephone);
     }
 
     @Override
@@ -105,7 +123,7 @@ public class User {
     
     @Override
     public String toString() {
-        return "User{" + "cpf=" + cpf + ", name=" + name + ", telefones=" + telefones + ", sexo=" + sexo + ", user=" + user + ", password=" + password + '}';
+        return "User{" + "cpf=" + cpf + ", name=" + name + ", telefones=" + telephones + ", sexo=" + sexo + ", user=" + user + ", password=" + password + '}';
     }
     
     
