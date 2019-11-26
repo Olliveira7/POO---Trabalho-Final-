@@ -14,7 +14,7 @@ public class Client {
     private String name;
     private String cpf;
     private String email;
-    private List<String> telefones;
+    private List<String> telephones;
     private String neighborhood;
     private String street;
     private String number_house;
@@ -27,7 +27,7 @@ public class Client {
         this.neighborhood = "";
         this.number_house = "";
         this.street = "";
-        this.telefones = new ArrayList<String>();
+        this.telephones = new ArrayList<String>();
     }
     
     public int getId(){
@@ -86,14 +86,22 @@ public class Client {
         this.number_house = newNumber;
     }
     
-    public void addTelefone(String telefone){
-        if(telefone.length() == 11 && telefone != null)
-            this.telefones.add(telefone);
+    public List<String> getTelephones() {
+        return telephones;
+    }
+
+    public void setTelephones(List<String> telephones) {
+        this.telephones = telephones;
     }
     
-    public void removeTelefone(String telefone){
-        if(this.telefones.contains(telefone))
-            this.telefones.remove(telefone);
+    public void addTelefone(String telephone){
+        if(telephone.length() == 11 && telephone != null)
+            this.telephones.add(telephone);
+    }
+    
+    public void removeTelefone(String telephone){
+        if(this.telephones.contains(telephone))
+            this.telephones.remove(telephone);
     }
 
     @Override
@@ -127,7 +135,7 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Client{" + "name=" + name + ", cpf=" + cpf + ", email=" + email + ", telefones=" + telefones + ", neighborhood=" + neighborhood + ", street=" + street + ", number_house=" + number_house + '}';
+        return "Client{" + "name=" + name + ", cpf=" + cpf + ", email=" + email + ", telephones=" + telephones + ", neighborhood=" + neighborhood + ", street=" + street + ", number_house=" + number_house + '}';
     }
     
     
