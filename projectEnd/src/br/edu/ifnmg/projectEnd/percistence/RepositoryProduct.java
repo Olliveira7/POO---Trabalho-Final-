@@ -27,8 +27,8 @@ public class RepositoryProduct {
                 sql.setString(1, object.getName());
                 sql.setString(2, object.getPurchase_unit());
                 sql.setString(3, object.getSelling_unit());
-                sql.setFloat(4, object.getSale_price());
-                sql.setFloat(5, object.getPurchase_price());
+                sql.setBigDecimal(4, object.getSale_price());
+                sql.setBigDecimal(5, object.getPurchase_price());
                 sql.setString(6, object.getDescription());
 
                 if(sql.executeUpdate() > 0){
@@ -44,8 +44,8 @@ public class RepositoryProduct {
                 sql.setString(1, object.getName());
                 sql.setString(2, object.getPurchase_unit());
                 sql.setString(3, object.getSelling_unit());
-                sql.setFloat(4, object.getSale_price());
-                sql.setFloat(5, object.getPurchase_price());
+                sql.setBigDecimal(4, object.getSale_price());
+                sql.setBigDecimal(5, object.getPurchase_price());
                 sql.setString(6, object.getDescription());
                 sql.setInt(7, object.getId());
                 System.out.println("oiii");
@@ -83,9 +83,9 @@ public class RepositoryProduct {
                 product.setDescription(result.getString("description"));
                 product.setId(result.getInt("id"));
                 product.setName(result.getString("name"));
-                product.setPurchase_price(result.getFloat("purchase_price"));
+                product.setPurchase_price(result.getBigDecimal("purchase_price"));
                 product.setPurchase_unit(result.getString("purchase_unit"));
-                product.setSale_price(result.getFloat("sale_price"));
+                product.setSale_price(result.getBigDecimal("sale_price"));
                 product.setSelling_unit(result.getString("selling_unit"));
                 
             }catch(SQLException ex){

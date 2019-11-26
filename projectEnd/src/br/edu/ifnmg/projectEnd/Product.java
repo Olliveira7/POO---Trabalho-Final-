@@ -5,14 +5,16 @@
  */
 package br.edu.ifnmg.projectEnd;
 
+import java.math.BigDecimal;
+
 
 public class Product {
     private String name;
     private String purchase_unit;    //Unidade de compra    
-    private String selling_unit;   //Unidade de venda
+    private String sale_unit;   //Unidade de venda
     private int id;
-    private float sale_price;   //preço de venda
-    private float purchase_price;   //preço de compra 
+    private BigDecimal sale_price;   //preço de venda
+    private BigDecimal purchase_price;   //preço de compra 
     private String description;   //descrição do produto
     
     //Dúvida: Existe algum tipo de atributo que pode ser usado para texto
@@ -21,9 +23,9 @@ public class Product {
         this.id = 0;
         this.name = "";
         this.purchase_unit = "";
-        this.purchase_price = 0;
-        this.selling_unit = "";
-        this.sale_price = 0;
+        this.purchase_price = new BigDecimal("0.0");
+        this.sale_unit = "";
+        this.sale_price = new BigDecimal("0.0");
         this.description = "";
     }
     
@@ -52,11 +54,11 @@ public class Product {
     }
     
     public String getSelling_unit(){
-        return this.selling_unit;
+        return this.sale_unit;
     }
     
-    public void setSelling_unit(String newSelling_unit){
-        this.selling_unit = newSelling_unit;
+    public void setSelling_unit(String newSale_unit){
+        this.sale_unit = newSale_unit;
     }
     
     public String getDescription(){
@@ -67,25 +69,25 @@ public class Product {
         this.description = newDescription;
     }
     
-    public float getSale_price(){
+    public BigDecimal getSale_price(){
         return this.sale_price;
     }
     
-    public void setSale_price(float newSale_price){
+    public void setSale_price(BigDecimal newSale_price){
         this.sale_price = newSale_price;
     }
     
-    public float getPurchase_price(){
+    public BigDecimal getPurchase_price(){
         return this.purchase_price;
     }
     
-    public void setPurchase_price(float newPurchase_price){
+    public void setPurchase_price(BigDecimal newPurchase_price){
         this.purchase_price = newPurchase_price;
     }
 
     @Override
     public String toString() {
-        return "Product{" + "name=" + name + ", purchase_unit=" + purchase_unit + ", selling_unit=" + selling_unit + ", id=" + id + ", sale_price=" + sale_price + ", purchase_price=" + purchase_price + ", description=" + description + '}';
+        return "Product{" + "name=" + name + ", purchase_unit=" + purchase_unit + ", selling_unit=" + sale_unit + ", id=" + id + ", sale_price=" + sale_price + ", purchase_price=" + purchase_price + ", description=" + description + '}';
     }
 
     

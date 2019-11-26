@@ -8,7 +8,6 @@ package br.edu.ifnmg.projectEnd;
 
 import br.edu.ifnmg.projectEnd.percistence.Database;
 import br.edu.ifnmg.projectEnd.percistence.RepositoryProduct;
-import br.edu.ifnmg.projectEnd.percistence.repository_client;
 import br.edu.ifnmg.projectEnd.percistence.repository_user;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +18,6 @@ public class ProjectEnd {
      */
     public static void main(String[] args) {
         
-        Product product = new Product();
-        
-        RepositoryProduct repo = new RepositoryProduct();
-        product = repo.Open(2);
-        System.out.println(product.toString());
         
 //        user.setCpf("123.456.789-99");
 //        user.setName("Diego");

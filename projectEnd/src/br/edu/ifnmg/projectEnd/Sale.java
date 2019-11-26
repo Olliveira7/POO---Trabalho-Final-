@@ -5,6 +5,7 @@
  */
 package br.edu.ifnmg.projectEnd;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,25 +14,35 @@ import java.util.List;
 
 public class Sale {
     
-    private float value_total;
+    private BigDecimal value_total;
     private List<Item> itens;
     private Date date;
     private Client client;
+    private User user;
     
     //tem q ver como manipular o Date
     
     public Sale(){
-        this.value_total = 0;
+        this.value_total = new BigDecimal("0,0");
         this.client = new Client();
         this.date = new Date();
         this.itens = new ArrayList<Item>();
+        this.user = new User();
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User newUser) {
+        this.user = newUser;
     }
     
-    public float getValue_total(){
+    public BigDecimal getValue_total(){
         return this.value_total;
     }
     
-    public void setValue_total(float newValue){
+    public void setValue_total(BigDecimal newValue){
         this.value_total = newValue;
     }
     
@@ -39,7 +50,7 @@ public class Sale {
         return this.client;
     }
     
-    public void setUser(Client newClient){
+    public void setClient(Client newClient){
         this.client = newClient;
     }
     
@@ -61,5 +72,12 @@ public class Sale {
         if(this.itens.contains(newItem))
             this.itens.remove(newItem);
     }
-   
+
+    @Override
+    public String toString() {
+        return "Sale{" + "value_total=" + value_total + ", itens=" + itens + ", date=" + date + ", client=" + client + ", user=" + user + '}';
+    }
+
+    
+    
 }
