@@ -35,6 +35,7 @@ public class MainScreen extends javax.swing.JFrame {
         abaRegisterUser = new javax.swing.JMenuItem();
         mmnClient = new javax.swing.JMenu();
         abaRegisterClient = new javax.swing.JMenuItem();
+        abaSeacheClient = new javax.swing.JMenuItem();
         mmnProduct = new javax.swing.JMenu();
         mmnProvider = new javax.swing.JMenu();
         mmnStock = new javax.swing.JMenu();
@@ -69,6 +70,14 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         mmnClient.add(abaRegisterClient);
+
+        abaSeacheClient.setText("Seache Client");
+        abaSeacheClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaSeacheClientActionPerformed(evt);
+            }
+        });
+        mmnClient.add(abaSeacheClient);
 
         jMenuBar1.add(mmnClient);
 
@@ -115,19 +124,28 @@ public class MainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void abaRegisterUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaRegisterUserActionPerformed
-        
-        
+        RegisterUser screen = new RegisterUser();
+        this.add(screen);
+        screen.setVisible(true);
         
         
     }//GEN-LAST:event_abaRegisterUserActionPerformed
 
     private void abaRegisterClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaRegisterClientActionPerformed
         
-        RegisterClient register = new RegisterClient();
-        this.add(register);
-        register.setVisible(true);
+        RegisterClient screen = new RegisterClient();
+        this.add(screen);
+        screen.setVisible(true);
         
     }//GEN-LAST:event_abaRegisterClientActionPerformed
+
+    private void abaSeacheClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaSeacheClientActionPerformed
+        
+        SeacheMainClient screen = new SeacheMainClient();
+        this.add(screen);
+        screen.setVisible(true);
+        
+    }//GEN-LAST:event_abaSeacheClientActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,6 +185,7 @@ public class MainScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem abaRegisterClient;
     private javax.swing.JMenuItem abaRegisterUser;
+    private javax.swing.JMenuItem abaSeacheClient;
     private javax.swing.JButton btnPurchase;
     private javax.swing.JButton btnSale;
     private javax.swing.JMenuBar jMenuBar1;

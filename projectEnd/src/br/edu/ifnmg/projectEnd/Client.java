@@ -14,6 +14,7 @@ public class Client {
     private String name;
     private String cpf;
     private String email;
+    private Sex sex;
     private List<String> telephones;
     private String neighborhood;
     private String street;
@@ -24,6 +25,7 @@ public class Client {
         this.name = "";
         this.cpf = "";
         this.email = "";
+        this.sex = Sex.F;
         this.neighborhood = "";
         this.number_house = "";
         this.street = "";
@@ -60,6 +62,14 @@ public class Client {
     
     public void setEmail(String newEmail){
         this.email = newEmail;
+    }
+    
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
     }
     
     public String getNeighborhood(){

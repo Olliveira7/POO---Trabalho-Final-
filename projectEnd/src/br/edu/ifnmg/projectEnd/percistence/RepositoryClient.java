@@ -24,13 +24,14 @@ public class RepositoryClient {
     public boolean Save(Client object){
         try{
             if(object.getId() == 0){
-                PreparedStatement sql = db.getConnection().prepareStatement("insert into client(name,cpf,email,street,number_house,neighborhood) value(?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement sql = db.getConnection().prepareStatement("insert into client(name,cpf,email,street,number_house,neighborhood,sex) value(?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
                 sql.setString(1, object.getName());
                 sql.setString(2, object.getCpf().replace("-","").replace(".",""));
                 sql.setString(3, object.getEmail());
                 sql.setString(4, object.getStreet());
                 sql.setString(5, object.getNumber_house());
                 sql.setString(6, object.getNeighborhood());
+                sql.setString(7, object.getSex().name());
 
                 if (sql.executeUpdate() > 0){
                     ResultSet id = sql.getGeneratedKeys();
@@ -42,14 +43,21 @@ public class RepositoryClient {
                 }
                 
             }else{
-                PreparedStatement sql = db.getConnection().prepareStatement("update Client set name = ?, cpf = ?, email = ?, street = ?, number_house = ?, neighborhood = ? where id = ?");
+                PreparedStatement sql = db.getConnection().prepareStatement("update Client set name = ?, cpf = ?, email = ?, street = ?, number_house = ?, neighborhood = ?, sex = ? where id = ?");
                 sql.setString(1, object.getName());
                 sql.setString(2, object.getCpf().replace("-","").replace(".",""));
-                sql.setString(3,object.getEmail());
+                sql.setString(3, object.getEmail());
                 sql.setString(4, object.getStreet());
                 sql.setString(5, object.getNumber_house());
                 sql.setString(6, object.getNeighborhood());
+                sql.setString(8, object.getSex().name());
                 sql.setInt(7, object.getId());
+                
+                if(sql.executeUpdate() > 0){
+                    return true;
+                }else{
+                    return false;
+                }
                 
             }                                                               
 
@@ -168,6 +176,29 @@ public class RepositoryClient {
         return false;
     }
     
+    
+    public Client CheckClient(Client filtro){
+        Client client = new Client();
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement("select * from client where name = ? and cpf = ?");
+            sql.setString(1, filtro.getName());
+            sql.setString(2, filtro.getCpf());
+            
+            ResultSet result = sql.executeQuery();
+            
+            if(result.next() == false){
+                client = null;
+                return client;
+            }else{
+                client.setCpf(result.getString("cpf"));
+                client.setName(result.getString("name"));
+                return client;
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return client;
+    }
     
 }
 

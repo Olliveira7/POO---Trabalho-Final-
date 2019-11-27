@@ -5,6 +5,7 @@
  */
 package br.edu.ifnmg.projectEnd.percistence;
 
+import br.edu.ifnmg.projectEnd.Sex;
 import br.edu.ifnmg.projectEnd.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,11 +23,11 @@ public class RepositoryUser {
     public boolean Save(User objeto){
         try{
             if(objeto.getId() == 0){
-                PreparedStatement sql = db.getConnection().prepareStatement("insert into user(name,cpf,password,sexo,user) value(?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement sql = db.getConnection().prepareStatement("insert into user(name,cpf,password,sex,user) value(?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
                 sql.setString(1, objeto.getName());
                 sql.setString(2, objeto.getCpf().replace("-","").replace(".",""));
                 sql.setString(3, objeto.getPassword());
-                sql.setString(4, objeto.getSexo());
+                sql.setString(4, objeto.getSex().name());
                 sql.setString(5, objeto.getUser());
 
                 if (sql.executeUpdate() > 0){
@@ -39,12 +40,15 @@ public class RepositoryUser {
                 }
                 
             }else{
-                PreparedStatement sql = db.getConnection().prepareStatement("update Client set name = ?, cpf = ?, password = ?, sexo = ?, user = ?");
+                PreparedStatement sql = db.getConnection().prepareStatement("update Client set name = ?, cpf = ?, password = ?, sex = ?, user = ?");
                 sql.setString(1, objeto.getName());
                 sql.setString(2, objeto.getCpf().replace("-","").replace(".",""));
                 sql.setString(3, objeto.getPassword());
-                sql.setString(4, objeto.getSexo());
+                sql.setString(4, objeto.getSex().name());
                 sql.setString(5, objeto.getUser());
+                
+                if(sql.executeUpdate() > 0)
+                    return true;
                 
             }                                                               
 
@@ -68,7 +72,7 @@ public class RepositoryUser {
                 user.setName(result.getString("name"));
                 user.setId(result.getInt("id"));
                 user.setPassword(result.getString("password"));
-                user.setSexo(result.getString("sexo"));
+                user.setSex(Sex.valueOf(result.getString("sexo")));
                 user.setUser(result.getString("user"));
             }catch(Exception ex){
                 user = null;
@@ -142,7 +146,7 @@ public class RepositoryUser {
                 user.setCpf(resul.getString("cpf"));
                 user.setName(resul.getString("name"));
                 user.setPassword(resul.getString("password"));
-                user.setSexo(resul.getString("sexo"));
+                user.setSex(Sex.valueOf(resul.getString("sex")));
                 user.setUser(resul.getString("user"));
                 return user;
             }

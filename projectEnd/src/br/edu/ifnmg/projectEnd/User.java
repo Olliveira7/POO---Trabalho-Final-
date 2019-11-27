@@ -10,7 +10,7 @@ public class User {
     private String cpf;
     private String name;
     private List<String> telephones;
-    private String sexo;
+    private Sex sex;
     private String user;
     private String password;
     
@@ -19,7 +19,7 @@ public class User {
         this.cpf = "";
         this.name = "";
         this.password = "";
-        this.sexo = "";
+        this.sex = Sex.F;
         this.telephones = new ArrayList<String>();
         this.user = "";
     }
@@ -56,12 +56,12 @@ public class User {
         this.password = newPassword;
     }
     
-    public String getSexo(){
-        return this.sexo;
+    public Sex getSex(){
+        return this.sex;
     }
     
-    public void setSexo(String newSexo){
-        this.sexo = newSexo;
+    public void setSex(Sex newSex){
+        this.sex = newSex;
     }
     
     public String getUser(){
@@ -123,7 +123,7 @@ public class User {
     
     @Override
     public String toString() {
-        return "User{" + "cpf=" + cpf + ", name=" + name + ", telefones=" + telephones + ", sexo=" + sexo + ", user=" + user + ", password=" + password + '}';
+        return "User{" + "cpf=" + cpf + ", name=" + name + ", telefones=" + telephones + ", sex=" + sex + ", user=" + user + ", password=" + password + '}';
     }
     
     

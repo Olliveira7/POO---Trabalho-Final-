@@ -6,8 +6,10 @@
 package br.edu.ifnmg.projectEnd.presation;
 
 import br.edu.ifnmg.projectEnd.Client;
+import br.edu.ifnmg.projectEnd.Sex;
 import br.edu.ifnmg.projectEnd.percistence.RepositoryClient;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
 /**
@@ -32,7 +34,7 @@ public class RegisterClient extends javax.swing.JInternalFrame {
         this.client.setNeighborhood(txtNeighborhood.getText());
         this.client.setNumber(txtNumberHouse.getText());
         this.client.setStreet(txtStreet.getText());
-        this.repository.Save(client);
+        this.client.setSex(Sex.valueOf(cbxSex.getSelectedItem().toString()));
     }
     
     public void UpdatePhone(){
@@ -155,6 +157,11 @@ public class RegisterClient extends javax.swing.JInternalFrame {
         });
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -286,13 +293,10 @@ public class RegisterClient extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblTelephonesMouseClicked
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        
+
         this.client.addTelefone(txtTelephone.getText());
         txtTelephone.setText("");
         UpdatePhone();
-        
-        
-        
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
@@ -301,18 +305,36 @@ public class RegisterClient extends javax.swing.JInternalFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         
+        Client clientTeste = new Client();
+        
         try{
-            if(this.txtName != null && this.txtCpf != null){
+            if(!this.txtName.getText().isEmpty() && !this.txtCpf.getText().isEmpty() && !this.cbxSex.getSelectedItem().toString().isEmpty()){
                 setClient();
-                
+                clientTeste = this.repository.CheckClient(client);
+                if(clientTeste == null){
+                    if( JOptionPane.showConfirmDialog(null, "Deseja realmente salvar as alterações?", "Confirmar", JOptionPane.YES_NO_OPTION) == 0){
+                        if(this.repository.Save(client)){
+                            JOptionPane.showMessageDialog(null, "Dados salvos com sucesso!");
+                            this.dispose();
+                        }
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Client Existente!");  
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Componentes obrigatórios faltando!!!");
             }
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-        
-        
-
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+
+        if(JOptionPane.showConfirmDialog(null, "Deseja realmente cancelar?","Confirmar", JOptionPane.YES_NO_OPTION) == 0){
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnCancelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
