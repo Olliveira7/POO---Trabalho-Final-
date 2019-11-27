@@ -38,12 +38,9 @@ public class RegisterClient extends javax.swing.JInternalFrame {
     }
     
     public void UpdatePhone(){
-        String[] telephone = new String[client.getTelephones().size()];
-        
+        String[] telephone = new String[client.getTelephones().size()];//Aqui ele está contando quantos elementos tem no arrayList
         telephone = client.getTelephones().toArray(telephone);
-        
         ListModel<String> Telephones = new DefaultComboBoxModel<>(telephone);
-        
         tblTelephones.setModel(Telephones);
     }
     
@@ -77,10 +74,10 @@ public class RegisterClient extends javax.swing.JInternalFrame {
         txtTelephone = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblTelephones = new javax.swing.JList<>();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblTelephones = new javax.swing.JList<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -142,13 +139,6 @@ public class RegisterClient extends javax.swing.JInternalFrame {
             }
         });
 
-        tblTelephones.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblTelephonesMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblTelephones);
-
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,6 +152,13 @@ public class RegisterClient extends javax.swing.JInternalFrame {
                 btnCancelActionPerformed(evt);
             }
         });
+
+        tblTelephones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTelephonesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblTelephones);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -215,14 +212,13 @@ public class RegisterClient extends javax.swing.JInternalFrame {
                                     .addComponent(btnSave)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(btnCancel))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(33, 33, 33)
-                                        .addComponent(btnAdd)
-                                        .addGap(43, 43, 43)
-                                        .addComponent(btnRemove))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(33, 33, 33)
+                                    .addComponent(btnAdd)
+                                    .addGap(43, 43, 43)
+                                    .addComponent(btnRemove)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -261,9 +257,9 @@ public class RegisterClient extends javax.swing.JInternalFrame {
                     .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd)
                     .addComponent(btnRemove))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave)
                     .addComponent(btnCancel))
@@ -288,15 +284,14 @@ public class RegisterClient extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
 
-    private void tblTelephonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTelephonesMouseClicked
-        txtTelephone.setText( tblTelephones.getSelectedValue() );
-    }//GEN-LAST:event_tblTelephonesMouseClicked
-
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-
-        this.client.addTelefone(txtTelephone.getText());
-        txtTelephone.setText("");
-        UpdatePhone();
+        try{
+            this.client.addTelefone(txtTelephone.getText());
+            txtTelephone.setText("");
+            UpdatePhone();
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
@@ -312,17 +307,18 @@ public class RegisterClient extends javax.swing.JInternalFrame {
                 setClient();
                 clientTeste = this.repository.CheckClient(client);
                 if(clientTeste == null){
-                    if( JOptionPane.showConfirmDialog(null, "Deseja realmente salvar as alterações?", "Confirmar", JOptionPane.YES_NO_OPTION) == 0){
+                    if( JOptionPane.showConfirmDialog(null, "Do you really want to save changes?", "Confirm", JOptionPane.YES_NO_OPTION) == 0){
                         if(this.repository.Save(client)){
-                            JOptionPane.showMessageDialog(null, "Dados salvos com sucesso!");
+                            repository.SaveTelephone(client);
+                            JOptionPane.showMessageDialog(null, "Saved Client!");
                             this.dispose();
                         }
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null, "Client Existente!");  
+                    JOptionPane.showMessageDialog(null, "Existing Client!");  
                 }
             }else{
-                JOptionPane.showMessageDialog(null, "Componentes obrigatórios faltando!!!");
+                JOptionPane.showMessageDialog(null, "Required components missing!!!");
             }
         }catch(Exception ex){
             System.out.println(ex.getMessage());
@@ -335,6 +331,10 @@ public class RegisterClient extends javax.swing.JInternalFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void tblTelephonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTelephonesMouseClicked
+        txtTelephone.setText( tblTelephones.getSelectedValue() );
+    }//GEN-LAST:event_tblTelephonesMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

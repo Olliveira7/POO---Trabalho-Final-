@@ -104,9 +104,12 @@ public class Client {
         this.telephones = telephones;
     }
     
-    public void addTelefone(String telephone){
-        if(telephone.length() == 11 && telephone != null)
+    public void addTelefone(String telephone)throws Exception{
+        if(telephone.length() >= 11 && telephone != null){
             this.telephones.add(telephone);
+        }else{
+            throw new Exception("Número de telefones menor!");
+        }
     }
     
     public void removeTelefone(String telephone){

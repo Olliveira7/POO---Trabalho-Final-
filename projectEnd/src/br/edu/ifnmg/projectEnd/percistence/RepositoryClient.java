@@ -161,19 +161,26 @@ public class RepositoryClient {
         return null;
     }
     
-    public boolean SaveTelephoneUni(int id, String telephone){
+    public void SaveTelephone(Client client){
         try{
-            PreparedStatement sql = db.getConnection().prepareStatement("insert into client_Telephone(client_fk,telephone) value(?,?)");
-            sql.setInt(1,id);
-            sql.setString(2,telephone);
+            PreparedStatement sql = db.getConnection().prepareStatement("delete from client_telephone client_fk = ?");
             
-            if(sql.executeUpdate() > 0){
-                return true;
+            sql.setInt(1, client.getId());
+            
+            String values = "";
+            for(String telefone : client.getTelephones()){
+                if(values.length() > 0) 
+                    values += ", ";
+                
+                values += "("+client.getId()+",'"+telefone+"')";
             }
+            
+            Statement sql2 = db.getConnection().createStatement();
+            
+            sql2.executeUpdate("insert into client_telephone(client_fk, telephone) VALUES " + values);
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-        return false;
     }
     
     
@@ -199,6 +206,31 @@ public class RepositoryClient {
         }
         return client;
     }
+    
+    public boolean UpdatePhone(Client client){
+        try{
+            String value = "";
+            
+            for(String telephone: client.getTelephones()){
+                if(telephone.length() > 0){
+                    value += ", ";
+                    value += "("+client.getId()+",'"+telephone+"')";
+                }
+            }
+            
+            PreparedStatement sql = db.getConnection().prepareStatement("insert into client_telephone(client_fk, telephone) values " + value);
+            
+            if(sql.executeUpdate() > 0){
+                return true;
+            }
+            
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }
+    
+    
     
 }
 
