@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -101,6 +102,37 @@ public class RepositoryProduct {
             }
             return product;
             
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+    
+    public List<Product> OpenAll(){
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement("select * from product");
+            ResultSet result = sql.executeQuery();
+            
+            List<Product> products = new ArrayList();
+            
+            while(result.next()){
+                Product product = new Product();
+                
+                try{
+                    product.setDescription(result.getString("description"));
+                    product.setId(result.getInt("id"));
+                    product.setName(result.getString("name"));
+                    product.setPurchase_price(result.getBigDecimal("purchase_price"));
+                    product.setPurchase_unit(UnitPurchase.valueOf(result.getString("purchase_unit")));
+                    product.setSale_price(result.getBigDecimal("sale_price"));
+                    product.setSale_unit(UnitSale.valueOf(result.getString("sale_unit")));
+                }catch(SQLException ex){
+                    product = null;
+                }
+                products.add(product);
+                
+            }
+            return products;
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }

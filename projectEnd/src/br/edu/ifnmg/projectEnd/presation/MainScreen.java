@@ -39,6 +39,7 @@ public class MainScreen extends javax.swing.JFrame {
         mmnProduct = new javax.swing.JMenu();
         abaRegisterProduct = new javax.swing.JMenuItem();
         abaDisableProduct = new javax.swing.JMenuItem();
+        abaSearchProduct = new javax.swing.JMenuItem();
         mmnProvider = new javax.swing.JMenu();
         mmnStock = new javax.swing.JMenu();
 
@@ -101,6 +102,14 @@ public class MainScreen extends javax.swing.JFrame {
         });
         mmnProduct.add(abaDisableProduct);
 
+        abaSearchProduct.setText("Search Product");
+        abaSearchProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaSearchProductActionPerformed(evt);
+            }
+        });
+        mmnProduct.add(abaSearchProduct);
+
         jMenuBar1.add(mmnProduct);
 
         mmnProvider.setText("Provider");
@@ -160,7 +169,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void abaSeacheClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaSeacheClientActionPerformed
         
-        SearcheMainClient screen = new SearcheMainClient();
+        SearchMainClient screen = new SearchMainClient();
         this.add(screen);
         screen.setVisible(true);
         
@@ -177,6 +186,12 @@ public class MainScreen extends javax.swing.JFrame {
         this.add(screen);
         screen.setVisible(true);
     }//GEN-LAST:event_abaDisableProductActionPerformed
+
+    private void abaSearchProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaSearchProductActionPerformed
+        SearchProduct screen = new SearchProduct();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_abaSearchProductActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,6 +234,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem abaRegisterProduct;
     private javax.swing.JMenuItem abaRegisterUser;
     private javax.swing.JMenuItem abaSeacheClient;
+    private javax.swing.JMenuItem abaSearchProduct;
     private javax.swing.JButton btnPurchase;
     private javax.swing.JButton btnSale;
     private javax.swing.JMenuBar jMenuBar1;
