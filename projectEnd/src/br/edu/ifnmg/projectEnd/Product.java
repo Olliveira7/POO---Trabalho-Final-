@@ -10,23 +10,33 @@ import java.math.BigDecimal;
 
 public class Product {
     private String name;
-    private String purchase_unit;    //Unidade de compra    
-    private String sale_unit;   //Unidade de venda
+    private UnitPurchase purchase_unit;    //Unidade de compra    
+    private UnitSale sale_unit;   //Unidade de venda
     private int id;
     private BigDecimal sale_price;   //preço de venda
     private BigDecimal purchase_price;   //preço de compra 
     private String description;   //descrição do produto
+    private int status;
     
     //Dúvida: Existe algum tipo de atributo que pode ser usado para texto
     
     public Product(){
         this.id = 0;
         this.name = "";
-        this.purchase_unit = "";
+        this.purchase_unit = UnitPurchase.Caixa;
         this.purchase_price = new BigDecimal("0.0");
-        this.sale_unit = "";
+        this.sale_unit = UnitSale.Unidade;
         this.sale_price = new BigDecimal("0.0");
         this.description = "";
+        this.status = 1;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int newStatus) {
+        this.status = newStatus;
     }
     
     public int getId(){
@@ -45,19 +55,19 @@ public class Product {
         this.name = newName;
     }
     
-    public String getPurchase_unit(){
+    public UnitPurchase getPurchase_unit(){
         return this.purchase_unit;
     }
     
-    public void setPurchase_unit(String newPurchase_unit){
+    public void setPurchase_unit(UnitPurchase newPurchase_unit){
         this.purchase_unit = newPurchase_unit;
     }
     
-    public String getSelling_unit(){
+    public UnitSale getSale_unit(){
         return this.sale_unit;
     }
     
-    public void setSelling_unit(String newSale_unit){
+    public void setSale_unit(UnitSale newSale_unit){
         this.sale_unit = newSale_unit;
     }
     

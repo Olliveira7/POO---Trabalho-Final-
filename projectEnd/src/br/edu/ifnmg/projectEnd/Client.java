@@ -104,7 +104,7 @@ public class Client {
         this.telephones = telephones;
     }
     
-    public void addTelefone(String telephone)throws Exception{
+    public void addTelephone(String telephone)throws Exception{
         if(telephone.length() >= 11 && telephone != null){
             this.telephones.add(telephone);
         }else{
@@ -112,7 +112,7 @@ public class Client {
         }
     }
     
-    public void removeTelefone(String telephone){
+    public void removeTelephone(String telephone){
         if(this.telephones.contains(telephone))
             this.telephones.remove(telephone);
     }

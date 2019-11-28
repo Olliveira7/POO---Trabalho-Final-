@@ -37,6 +37,7 @@ public class MainScreen extends javax.swing.JFrame {
         abaRegisterClient = new javax.swing.JMenuItem();
         abaSeacheClient = new javax.swing.JMenuItem();
         mmnProduct = new javax.swing.JMenu();
+        abaRegisterProduct = new javax.swing.JMenuItem();
         mmnProvider = new javax.swing.JMenu();
         mmnStock = new javax.swing.JMenu();
 
@@ -82,6 +83,15 @@ public class MainScreen extends javax.swing.JFrame {
         jMenuBar1.add(mmnClient);
 
         mmnProduct.setText("Product");
+
+        abaRegisterProduct.setText("Register Product");
+        abaRegisterProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaRegisterProductActionPerformed(evt);
+            }
+        });
+        mmnProduct.add(abaRegisterProduct);
+
         jMenuBar1.add(mmnProduct);
 
         mmnProvider.setText("Provider");
@@ -141,11 +151,17 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void abaSeacheClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaSeacheClientActionPerformed
         
-        SeacheMainClient screen = new SeacheMainClient();
+        SearcheMainClient screen = new SearcheMainClient();
         this.add(screen);
         screen.setVisible(true);
         
     }//GEN-LAST:event_abaSeacheClientActionPerformed
+
+    private void abaRegisterProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaRegisterProductActionPerformed
+        RegisterProduct screen = new RegisterProduct();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_abaRegisterProductActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,6 +200,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem abaRegisterClient;
+    private javax.swing.JMenuItem abaRegisterProduct;
     private javax.swing.JMenuItem abaRegisterUser;
     private javax.swing.JMenuItem abaSeacheClient;
     private javax.swing.JButton btnPurchase;

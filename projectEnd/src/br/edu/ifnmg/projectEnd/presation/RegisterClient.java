@@ -286,7 +286,7 @@ public class RegisterClient extends javax.swing.JInternalFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         try{
-            this.client.addTelefone(txtTelephone.getText());
+            this.client.addTelephone(txtTelephone.getText());
             txtTelephone.setText("");
             UpdatePhone();
         }catch(Exception ex){
@@ -295,7 +295,11 @@ public class RegisterClient extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        // TODO add your handling code here:
+        if(!txtTelephone.getText().isEmpty()){
+            this.client.removeTelephone(txtTelephone.getText());
+            txtTelephone.setText("");
+        }
+        UpdatePhone();
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed

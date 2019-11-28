@@ -6,6 +6,7 @@
 package br.edu.ifnmg.projectEnd.percistence;
 
 import br.edu.ifnmg.projectEnd.Client;
+import br.edu.ifnmg.projectEnd.Sex;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -50,8 +51,8 @@ public class RepositoryClient {
                 sql.setString(4, object.getStreet());
                 sql.setString(5, object.getNumber_house());
                 sql.setString(6, object.getNeighborhood());
-                sql.setString(8, object.getSex().name());
-                sql.setInt(7, object.getId());
+                sql.setString(7, object.getSex().name());
+                sql.setInt(8, object.getId());
                 
                 if(sql.executeUpdate() > 0){
                     return true;
@@ -199,8 +200,42 @@ public class RepositoryClient {
             }else{
                 client.setCpf(result.getString("cpf"));
                 client.setName(result.getString("name"));
+                client.setEmail(result.getString("email"));
+                client.setNeighborhood(result.getString("neighborhood"));
+                client.setNumber(result.getString("number_house"));
+                client.setSex(Sex.valueOf(result.getString("sex")));
+                client.setStreet(result.getString("street"));
                 return client;
             }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return client;
+    }
+    
+    public Client CheckClientId(Client filtro){
+        Client client = new Client();
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement("select * from client where id = ?");
+            sql.setInt(1, filtro.getId());
+            
+            ResultSet result = sql.executeQuery();
+            
+            
+            if(result.next() == false){
+                client = null;
+                return client;
+            }else{
+                client.setCpf(result.getString("cpf"));
+                client.setName(result.getString("name"));
+                client.setEmail(result.getString("email"));
+                client.setNeighborhood(result.getString("neighborhood"));
+                client.setNumber(result.getString("number_house"));
+                client.setSex(Sex.valueOf(result.getString("sex")));
+                client.setStreet(result.getString("street"));
+                return client;
+            }
+            
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }
@@ -228,6 +263,23 @@ public class RepositoryClient {
             System.out.println(ex.getMessage());
         }
         return false;
+    }
+    
+    public Client SeacheListTelephone(Client client) throws Exception{
+        Client clientTest = new Client();
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement("select telephone from client_telephone where client_fk = ?");
+            sql.setInt(1, client.getId());
+            ResultSet result = sql.executeQuery();
+            while(result.next()){
+                clientTest.addTelephone(result.getString("telephone"));
+            }
+            return clientTest;
+        }catch(SQLException ex){
+            System.out.println("repositório client "+ex.getMessage());
+        }
+        client = null;
+        return client;
     }
     
     

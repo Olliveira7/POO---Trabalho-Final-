@@ -6,6 +6,8 @@
 package br.edu.ifnmg.projectEnd.percistence;
 
 import br.edu.ifnmg.projectEnd.Product;
+import br.edu.ifnmg.projectEnd.UnitPurchase;
+import br.edu.ifnmg.projectEnd.UnitSale;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,13 +25,14 @@ public class RepositoryProduct {
     public boolean Save(Product object){
         try{
             if(object.getId() == 0){
-                PreparedStatement sql = db.getConnection().prepareStatement("insert into product(name,purchase_unit,selling_unit,sale_price,purchase_price,description) value (?,?,?,?,?,?);",Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement sql = db.getConnection().prepareStatement("insert into product(name,purchase_unit,sale_unit,sale_price,purchase_price,description,status) value (?,?,?,?,?,?,?);",Statement.RETURN_GENERATED_KEYS);
                 sql.setString(1, object.getName());
-                sql.setString(2, object.getPurchase_unit());
-                sql.setString(3, object.getSelling_unit());
+                sql.setString(2, object.getPurchase_unit().name());
+                sql.setString(3, object.getSale_unit().name());
                 sql.setBigDecimal(4, object.getSale_price());
                 sql.setBigDecimal(5, object.getPurchase_price());
                 sql.setString(6, object.getDescription());
+                sql.setInt(7, object.getStatus());
 
                 if(sql.executeUpdate() > 0){
                     ResultSet result = sql.getGeneratedKeys();
@@ -40,15 +43,19 @@ public class RepositoryProduct {
                     return false;
                 }
             }else{
-                PreparedStatement sql = db.getConnection().prepareStatement("update product set name = ?, purchase_unit = ?, selling_unit = ?, sale_price = ?, purchase_price = ?, description = ? where id = ?");
+                PreparedStatement sql = db.getConnection().prepareStatement("update product set name = ?, purchase_unit = ?, sale_unit = ?, sale_price = ?, purchase_price = ?, description = ?, status = ? where id = ?");
                 sql.setString(1, object.getName());
-                sql.setString(2, object.getPurchase_unit());
-                sql.setString(3, object.getSelling_unit());
+                sql.setString(2, object.getPurchase_unit().name());
+                sql.setString(3, object.getSale_unit().name());
                 sql.setBigDecimal(4, object.getSale_price());
                 sql.setBigDecimal(5, object.getPurchase_price());
                 sql.setString(6, object.getDescription());
-                sql.setInt(7, object.getId());
-                System.out.println("oiii");
+                sql.setInt(7, object.getStatus());
+                sql.setInt(8, object.getId());
+                
+                if(sql.executeUpdate() > 0){
+                    return true;
+                }
                 
             }
         }catch(SQLException ex){
@@ -84,9 +91,9 @@ public class RepositoryProduct {
                 product.setId(result.getInt("id"));
                 product.setName(result.getString("name"));
                 product.setPurchase_price(result.getBigDecimal("purchase_price"));
-                product.setPurchase_unit(result.getString("purchase_unit"));
+                product.setPurchase_unit(UnitPurchase.valueOf(result.getString("purchase_unit")));
                 product.setSale_price(result.getBigDecimal("sale_price"));
-                product.setSelling_unit(result.getString("selling_unit"));
+                product.setSale_unit(UnitSale.valueOf(result.getString("sale_unit")));
                 
             }catch(SQLException ex){
                 product = null;
@@ -100,4 +107,24 @@ public class RepositoryProduct {
         return null;
     }
     
+    
+    public boolean CheckProduct(String product){
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement("select * from product where name = ?");
+            sql.setString(1, product);
+            ResultSet result = sql.executeQuery();
+            if(result.next() == false){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }
+    
+    public boolean DeleteStatus(){
+        try{}catch(){}
+    }
 }

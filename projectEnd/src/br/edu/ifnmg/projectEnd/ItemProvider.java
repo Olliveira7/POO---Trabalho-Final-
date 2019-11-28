@@ -12,14 +12,12 @@ public class ItemProvider {
     //A minha unidade deve ter uma enumeração
     private int amount;
     private float value;
-    private Provider provider;
     
     public ItemProvider(){
         this.product = new Product();
         // Inicializar a unidade
         this.amount = 0;
         this.value = 0;
-        this.provider = new Provider();
     }
     
     public Product getProduct(){
@@ -46,11 +44,4 @@ public class ItemProvider {
         this.value = newValue;
     }
     
-    public Provider getProvider(){
-        return this.provider;
-    }
-    
-    public void setProvider(Provider newProvider){
-        this.provider = newProvider;
-    }
 }
