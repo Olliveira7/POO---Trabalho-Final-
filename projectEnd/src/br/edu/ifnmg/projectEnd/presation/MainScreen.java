@@ -38,6 +38,7 @@ public class MainScreen extends javax.swing.JFrame {
         abaSeacheClient = new javax.swing.JMenuItem();
         mmnProduct = new javax.swing.JMenu();
         abaRegisterProduct = new javax.swing.JMenuItem();
+        abaDisableProduct = new javax.swing.JMenuItem();
         mmnProvider = new javax.swing.JMenu();
         mmnStock = new javax.swing.JMenu();
 
@@ -91,6 +92,14 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         mmnProduct.add(abaRegisterProduct);
+
+        abaDisableProduct.setText("Disable Product");
+        abaDisableProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaDisableProductActionPerformed(evt);
+            }
+        });
+        mmnProduct.add(abaDisableProduct);
 
         jMenuBar1.add(mmnProduct);
 
@@ -163,6 +172,12 @@ public class MainScreen extends javax.swing.JFrame {
         screen.setVisible(true);
     }//GEN-LAST:event_abaRegisterProductActionPerformed
 
+    private void abaDisableProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaDisableProductActionPerformed
+        DisableProduct screen = new DisableProduct();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_abaDisableProductActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -199,6 +214,7 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem abaDisableProduct;
     private javax.swing.JMenuItem abaRegisterClient;
     private javax.swing.JMenuItem abaRegisterProduct;
     private javax.swing.JMenuItem abaRegisterUser;

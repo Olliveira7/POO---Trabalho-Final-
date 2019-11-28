@@ -124,7 +124,37 @@ public class RepositoryProduct {
         return false;
     }
     
-    public boolean DeleteStatus(){
-        try{}catch(){}
+    public boolean DeleteStatus(int id){    //Esse método serve para desativar o produto
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement("update product set status = ? where id = ?");
+            sql.setInt(1, 0);
+            sql.setInt(2, id);
+            if(sql.executeUpdate() > 0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }
+    
+    public boolean CheckStatus(int id){
+    
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement("select status from product where id = ?");
+            sql.setInt(1, id);
+            ResultSet result = sql.executeQuery();
+            result.next();
+            if(result.getInt("status") == 1){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
     }
 }
