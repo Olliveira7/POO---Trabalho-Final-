@@ -41,6 +41,7 @@ public class MainScreen extends javax.swing.JFrame {
         abaDisableProduct = new javax.swing.JMenuItem();
         abaSearchProduct = new javax.swing.JMenuItem();
         mmnProvider = new javax.swing.JMenu();
+        abaRegisterProvider = new javax.swing.JMenuItem();
         mmnStock = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -113,6 +114,15 @@ public class MainScreen extends javax.swing.JFrame {
         jMenuBar1.add(mmnProduct);
 
         mmnProvider.setText("Provider");
+
+        abaRegisterProvider.setText("Register Provider");
+        abaRegisterProvider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaRegisterProviderActionPerformed(evt);
+            }
+        });
+        mmnProvider.add(abaRegisterProvider);
+
         jMenuBar1.add(mmnProvider);
 
         mmnStock.setText("Stock");
@@ -193,6 +203,12 @@ public class MainScreen extends javax.swing.JFrame {
         screen.setVisible(true);
     }//GEN-LAST:event_abaSearchProductActionPerformed
 
+    private void abaRegisterProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaRegisterProviderActionPerformed
+        RegisterProvider screen = new RegisterProvider();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_abaRegisterProviderActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -232,6 +248,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem abaDisableProduct;
     private javax.swing.JMenuItem abaRegisterClient;
     private javax.swing.JMenuItem abaRegisterProduct;
+    private javax.swing.JMenuItem abaRegisterProvider;
     private javax.swing.JMenuItem abaRegisterUser;
     private javax.swing.JMenuItem abaSeacheClient;
     private javax.swing.JMenuItem abaSearchProduct;

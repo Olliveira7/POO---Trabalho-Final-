@@ -169,11 +169,11 @@ public class RepositoryClient {
             sql.setInt(1, client.getId());
             
             String values = "";
-            for(String telefone : client.getTelephones()){
+            for(String telephone : client.getTelephones()){
                 if(values.length() > 0) 
                     values += ", ";
                 
-                values += "("+client.getId()+",'"+telefone+"')";
+                values += "("+client.getId()+",'"+telephone+"')";
             }
             
             Statement sql2 = db.getConnection().createStatement();

@@ -331,7 +331,7 @@ public class RegisterClient extends javax.swing.JInternalFrame {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
 
-        if(JOptionPane.showConfirmDialog(null, "Deseja realmente cancelar?","Confirmar", JOptionPane.YES_NO_OPTION) == 0){
+        if(JOptionPane.showConfirmDialog(null, "Do you really want to cancel?","Confirm", JOptionPane.YES_NO_OPTION) == 0){
             this.dispose();
         }
     }//GEN-LAST:event_btnCancelActionPerformed

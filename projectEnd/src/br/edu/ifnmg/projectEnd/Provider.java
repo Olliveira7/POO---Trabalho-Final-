@@ -10,8 +10,9 @@ import java.util.List;
 
 
 public class Provider {
-
-    private String Cnpj;
+    
+    private int id;
+    private String cnpj;
     private String name;
     private String reason_social;
     private List<String> telephones;
@@ -19,16 +20,43 @@ public class Provider {
     private String street;
     private String number_provider;
     private String email;
+    private int status;
     
     public Provider(){
-        this.Cnpj = "";
+        this.id = 0;
+        this.cnpj = "";
         this.email = "";
         this.name = "";
+        this.status = 1;
         this.telephones = new ArrayList<String>();
         this.reason_social = "";
         this.neighborhood = "";
         this.number_provider = "";
         this.street = "";
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public List<String> getTelephones() {
+        return telephones;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setId(int newId) {
+        this.id = newId;
+    }
+
+    public void setTelephones(List<String> newTelephones) {
+        this.telephones = newTelephones;
+    }
+
+    public void setStatus(int newStatus) {
+        this.status = newStatus;
     }
     
     public String getName(){
@@ -40,11 +68,11 @@ public class Provider {
     }
     
     public String getCnpj(){
-        return this.Cnpj;
+        return this.cnpj;
     }
     
-    public void setCpf(String newCnpj){
-        this.Cnpj = newCnpj;
+    public void setCnpj(String newCnpj){
+        this.cnpj = newCnpj;
     }
     
     public String getEmail(){
@@ -87,20 +115,24 @@ public class Provider {
         this.number_provider = newNumber;
     }
     
-    public void addTelephone(String telephone){
-        if(telephone.length() == 11 && telephone != null)
+    public void addTelephone(String telephone)throws Exception{
+        if(telephone.length() >= 11 && telephone != null){
             this.telephones.add(telephone);
-    }
-    
-    public void removeTelefone(String telefone){
-        if(this.telephones.contains(telefone))
-            this.telephones.remove(telefone);
+        }else{
+            throw new Exception("Lower than allowed number of phones");
+        }
+    }    
+    public void removeTelephone(String telephone){
+        if(this.telephones.contains(telephone))
+            this.telephones.remove(telephone);
     }
 
     @Override
     public String toString() {
-        return "Provider{" + "Cnpj=" + Cnpj + ", name=" + name + ", reason_social=" + reason_social + ", telephones=" + telephones + ", neighborhood=" + neighborhood + ", street=" + street + ", number_provider=" + number_provider + ", email=" + email + '}';
+        return "Provider{" + "id=" + id + ", cnpj=" + cnpj + ", name=" + name + ", reason_social=" + reason_social + ", telephones=" + telephones + ", neighborhood=" + neighborhood + ", street=" + street + ", number_provider=" + number_provider + ", email=" + email + ", status=" + status + '}';
     }
+
+    
     
     
 }

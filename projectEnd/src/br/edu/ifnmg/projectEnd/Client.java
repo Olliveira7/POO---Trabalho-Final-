@@ -108,7 +108,7 @@ public class Client {
         if(telephone.length() >= 11 && telephone != null){
             this.telephones.add(telephone);
         }else{
-            throw new Exception("Número de telefones menor!");
+            throw new Exception("Lower than allowed number of phones");
         }
     }
     
