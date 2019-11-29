@@ -33,15 +33,18 @@ public class MainScreen extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         mmnUser = new javax.swing.JMenu();
         abaRegisterUser = new javax.swing.JMenuItem();
+        btnSearchUser = new javax.swing.JMenuItem();
         mmnClient = new javax.swing.JMenu();
         abaRegisterClient = new javax.swing.JMenuItem();
         abaSeacheClient = new javax.swing.JMenuItem();
         mmnProduct = new javax.swing.JMenu();
         abaRegisterProduct = new javax.swing.JMenuItem();
-        abaDisableProduct = new javax.swing.JMenuItem();
         abaSearchProduct = new javax.swing.JMenuItem();
+        abaDisableProduct = new javax.swing.JMenuItem();
+        abaEnableProduct = new javax.swing.JMenuItem();
         mmnProvider = new javax.swing.JMenu();
         abaRegisterProvider = new javax.swing.JMenuItem();
+        abaDisableProvider = new javax.swing.JMenuItem();
         mmnStock = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -62,6 +65,14 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         mmnUser.add(abaRegisterUser);
+
+        btnSearchUser.setText("Search User");
+        btnSearchUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchUserActionPerformed(evt);
+            }
+        });
+        mmnUser.add(btnSearchUser);
 
         jMenuBar1.add(mmnUser);
 
@@ -95,6 +106,14 @@ public class MainScreen extends javax.swing.JFrame {
         });
         mmnProduct.add(abaRegisterProduct);
 
+        abaSearchProduct.setText("Search Product");
+        abaSearchProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaSearchProductActionPerformed(evt);
+            }
+        });
+        mmnProduct.add(abaSearchProduct);
+
         abaDisableProduct.setText("Disable Product");
         abaDisableProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,13 +122,13 @@ public class MainScreen extends javax.swing.JFrame {
         });
         mmnProduct.add(abaDisableProduct);
 
-        abaSearchProduct.setText("Search Product");
-        abaSearchProduct.addActionListener(new java.awt.event.ActionListener() {
+        abaEnableProduct.setText("Enable Product");
+        abaEnableProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                abaSearchProductActionPerformed(evt);
+                abaEnableProductActionPerformed(evt);
             }
         });
-        mmnProduct.add(abaSearchProduct);
+        mmnProduct.add(abaEnableProduct);
 
         jMenuBar1.add(mmnProduct);
 
@@ -122,6 +141,14 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         mmnProvider.add(abaRegisterProvider);
+
+        abaDisableProvider.setText("Disable Provider");
+        abaDisableProvider.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaDisableProviderActionPerformed(evt);
+            }
+        });
+        mmnProvider.add(abaDisableProvider);
 
         jMenuBar1.add(mmnProvider);
 
@@ -209,6 +236,24 @@ public class MainScreen extends javax.swing.JFrame {
         screen.setVisible(true);
     }//GEN-LAST:event_abaRegisterProviderActionPerformed
 
+    private void abaDisableProviderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaDisableProviderActionPerformed
+        DisableProvider screen = new DisableProvider();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_abaDisableProviderActionPerformed
+
+    private void abaEnableProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaEnableProductActionPerformed
+        EnableProduct screen = new EnableProduct();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_abaEnableProductActionPerformed
+
+    private void btnSearchUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchUserActionPerformed
+        SearchUser screen = new SearchUser();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_btnSearchUserActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -246,6 +291,8 @@ public class MainScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem abaDisableProduct;
+    private javax.swing.JMenuItem abaDisableProvider;
+    private javax.swing.JMenuItem abaEnableProduct;
     private javax.swing.JMenuItem abaRegisterClient;
     private javax.swing.JMenuItem abaRegisterProduct;
     private javax.swing.JMenuItem abaRegisterProvider;
@@ -254,6 +301,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem abaSearchProduct;
     private javax.swing.JButton btnPurchase;
     private javax.swing.JButton btnSale;
+    private javax.swing.JMenuItem btnSearchUser;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel labelSuper;
     private javax.swing.JMenu mmnClient;

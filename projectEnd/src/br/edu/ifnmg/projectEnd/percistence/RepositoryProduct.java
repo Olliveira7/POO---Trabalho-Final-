@@ -81,7 +81,8 @@ public class RepositoryProduct {
     
     public Product Open(int id){
         try{
-            PreparedStatement sql = db.getConnection().prepareStatement("select * from product");
+            PreparedStatement sql = db.getConnection().prepareStatement("select * from product where id = ?");
+            sql.setInt(1, id);
             ResultSet result = sql.executeQuery();
             result.next();
             
@@ -108,9 +109,9 @@ public class RepositoryProduct {
         return null;
     }
     
-    public List<Product> OpenAll(){
+    public List<Product> OpenList(String consult){
         try{
-            PreparedStatement sql = db.getConnection().prepareStatement("select * from product");
+            PreparedStatement sql = db.getConnection().prepareStatement(consult);
             ResultSet result = sql.executeQuery();
             
             List<Product> products = new ArrayList();
@@ -156,11 +157,10 @@ public class RepositoryProduct {
         return false;
     }
     
-    public boolean DeleteStatus(int id){    //Esse método serve para desativar o produto
+    public boolean Status(int id, String consult){    //Esse método serve para desativar o produto
         try{
-            PreparedStatement sql = db.getConnection().prepareStatement("update product set status = ? where id = ?");
-            sql.setInt(1, 0);
-            sql.setInt(2, id);
+            PreparedStatement sql = db.getConnection().prepareStatement(consult +"?");
+            sql.setInt(1, id);
             if(sql.executeUpdate() > 0){
                 return true;
             }else{

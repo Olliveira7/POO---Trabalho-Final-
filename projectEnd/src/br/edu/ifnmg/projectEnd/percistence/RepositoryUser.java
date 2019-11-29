@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class RepositoryUser {
@@ -23,12 +25,13 @@ public class RepositoryUser {
     public boolean Save(User objeto){
         try{
             if(objeto.getId() == 0){
-                PreparedStatement sql = db.getConnection().prepareStatement("insert into user(name,cpf,password,sex,user) value(?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement sql = db.getConnection().prepareStatement("insert into user(name,cpf,password,sex,user,status) value(?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
                 sql.setString(1, objeto.getName());
                 sql.setString(2, objeto.getCpf().replace("-","").replace(".",""));
                 sql.setString(3, objeto.getPassword());
                 sql.setString(4, objeto.getSex().name());
                 sql.setString(5, objeto.getUser());
+                sql.setInt(6, objeto.getStatus());
 
                 if (sql.executeUpdate() > 0){
                     ResultSet id = sql.getGeneratedKeys();
@@ -82,6 +85,35 @@ public class RepositoryUser {
             return user;
             
         }catch(SQLException ex){
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+    
+    public List<User> OpenList(String consult){
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement(consult);
+            ResultSet result = sql.executeQuery();
+            
+            List<User> users = new ArrayList();
+            
+            while(result.next()){
+                User user = new User();
+                
+                try{
+                    user.setCpf(result.getString("cpf"));
+                    user.setId((result.getInt("id")));
+                    user.setName(result.getString("name"));
+                    user.setSex(Sex.valueOf(result.getString("sex")));
+                    user.setUser(result.getString("user"));
+                }catch(SQLException ex){
+                    user = null;
+                }
+                users.add(user);
+                
+            }
+            return users;
+        }catch(Exception ex){
             System.out.println(ex.getMessage());
         }
         return null;

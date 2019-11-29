@@ -13,6 +13,7 @@ public class User {
     private Sex sex;
     private String user;
     private String password;
+    private int status;
     
     public User(){
         this.id = 0;
@@ -22,7 +23,22 @@ public class User {
         this.sex = Sex.F;
         this.telephones = new ArrayList<String>();
         this.user = "";
+        this.status = 1;
     }
+
+    public List<String> getTelephones() {
+        return telephones;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    
+    
     
     public int getId(){
         return this.id;
