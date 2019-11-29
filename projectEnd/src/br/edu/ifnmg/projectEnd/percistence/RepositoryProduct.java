@@ -157,6 +157,23 @@ public class RepositoryProduct {
         return false;
     }
     
+    public boolean CheckProductIdName(int id, String product){
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement("select * from product where name = ? and id = ?");
+            sql.setString(1, product);
+            sql.setInt(2, id);
+            ResultSet result = sql.executeQuery();
+            if(result.next() == false){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }
+    
     public boolean Status(int id, String consult){    //Esse método serve para desativar o produto
         try{
             PreparedStatement sql = db.getConnection().prepareStatement(consult +"?");

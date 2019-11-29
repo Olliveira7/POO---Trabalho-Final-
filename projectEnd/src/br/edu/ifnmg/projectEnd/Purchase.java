@@ -32,6 +32,8 @@ public class Purchase { //compra
         return this.value_total;
     }
     
+    
+    
     public void setValue_total(float newValue){
         this.value_total = newValue;
     }
@@ -46,6 +48,18 @@ public class Purchase { //compra
     
     public Date getDate(){
         return this.date;
+    }
+
+    public List<ItemProvider> getItens() {
+        return itens;
+    }
+
+    public Provider getProvider() {
+        return provider;
+    }
+
+    public void setProvider(Provider provider) {
+        this.provider = provider;
     }
     
     public void setDate(Date newDate){
