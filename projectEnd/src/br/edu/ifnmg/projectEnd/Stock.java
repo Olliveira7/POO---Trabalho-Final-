@@ -9,13 +9,11 @@ package br.edu.ifnmg.projectEnd;
 
 public class Stock {
     
-    private int id;
     private int amount;
     private Product product;
     
     public Stock(){
         this.amount = 0;
-        this.id = 0;
         this.product = new Product();
     }
     
@@ -27,20 +25,17 @@ public class Stock {
         this.amount = newAmount;
     }
     
-    public int getId(){
-        return this.id;
-    }
-    
-    public void setId(int newId){
-        this.id = newId;
-    }
-    
     public Product getProduct(){
         return this.product;
     }
     
     public void setProduct(Product newProduct){
         this.product = newProduct;
+    }
+
+    @Override
+    public String toString() {
+        return "Stock{" + "amount=" + amount + ", product=" + product + '}';
     }
     
     

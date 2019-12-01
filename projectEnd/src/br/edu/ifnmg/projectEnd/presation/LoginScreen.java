@@ -110,7 +110,6 @@ public class LoginScreen extends javax.swing.JFrame {
         
         User user = new User();
         RepositoryUser repository = new RepositoryUser(); 
-        MainScreen main = new MainScreen();
         //Nessa parte irei verificar se txtPassword está vazio e se txtSenha tem algum valor
         if(!this.txtUser.getText().isEmpty() && this.txtPassword.getPassword().length > 0){
             user.setUser(txtUser.getText());
@@ -119,6 +118,7 @@ public class LoginScreen extends javax.swing.JFrame {
             if(user == null){
                 JOptionPane.showMessageDialog(null, "The data is wrong");
             }else{//Nessa parte eu vou mostrar a próxima tela e tirar a anterior
+                MainScreen main = new MainScreen();
                 main.setVisible(true);
                 this.setVisible(false);
             }

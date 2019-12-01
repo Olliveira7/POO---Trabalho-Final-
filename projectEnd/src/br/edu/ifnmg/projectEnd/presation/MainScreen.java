@@ -5,6 +5,8 @@
  */
 package br.edu.ifnmg.projectEnd.presation;
 
+import br.edu.ifnmg.projectEnd.User;
+
 /**
  *
  * @author Diego
@@ -260,8 +262,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchUserActionPerformed
 
     private void btnPurchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPurchaseActionPerformed
-        
-        PurchaseId screen = new PurchaseId();
+        AutentificarUser screen = new AutentificarUser();
         this.add(screen);
         screen.setVisible(true);
     }//GEN-LAST:event_btnPurchaseActionPerformed

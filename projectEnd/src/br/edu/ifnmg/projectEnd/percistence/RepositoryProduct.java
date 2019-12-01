@@ -39,6 +39,8 @@ public class RepositoryProduct {
                     ResultSet result = sql.getGeneratedKeys();
                     result.next();
                     object.setId(result.getInt(1));
+                    RepositoryStock repository = new RepositoryStock();
+                    repository.InicializarProduct(object.getId());
                     return true;
                 }else{
                     return false;

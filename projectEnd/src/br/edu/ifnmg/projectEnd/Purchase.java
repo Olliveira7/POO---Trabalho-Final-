@@ -5,6 +5,7 @@
  */
 package br.edu.ifnmg.projectEnd;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,8 @@ import java.util.List;
 
 public class Purchase { //compra
     
-    private float value_total;
+    private int id;
+    private BigDecimal value_total;
     private List<ItemProvider> itens;
     private Date date;
     private User user;
@@ -22,19 +24,27 @@ public class Purchase { //compra
     //tem q ver como manipular o Date
     
     public Purchase(){
-        this.value_total = 0;
+        this.id = 0;
+        this.value_total = new BigDecimal("0.0");
         this.user = new User();
         this.date = new Date();
+        this.provider = new Provider();
         this.itens = new ArrayList<ItemProvider>();
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
-    public float getValue_total(){
+    public BigDecimal getValue_total(){
         return this.value_total;
     }
     
-    
-    
-    public void setValue_total(float newValue){
+    public void setValue_total(BigDecimal newValue){
         this.value_total = newValue;
     }
     
