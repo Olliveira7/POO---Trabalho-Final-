@@ -75,8 +75,9 @@ public class RepositoryUser {
                 user.setName(result.getString("name"));
                 user.setId(result.getInt("id"));
                 user.setPassword(result.getString("password"));
-                user.setSex(Sex.valueOf(result.getString("sexo")));
+                user.setSex(Sex.valueOf(result.getString("sex")));
                 user.setUser(result.getString("user"));
+                user.setStatus(result.getInt("status"));
             }catch(Exception ex){
                 user = null;
                 System.out.println("Deu problema nas especifiações do banco: " + ex.getMessage());
@@ -187,4 +188,53 @@ public class RepositoryUser {
         }
         return user;
     }
+    
+    public boolean CheckUserId(int id){
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement("select * from user where id = ?");
+            sql.setInt(1, id);
+            ResultSet result = sql.executeQuery();
+            if(result.next() == false){
+                return false;
+            }else{
+                return true;
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }
+    
+    public boolean CheckStatus(int id){
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement("select * from user where id = ?");
+            sql.setInt(1, id);
+            ResultSet result = sql.executeQuery();
+            result.next();
+            if(result.getInt("status") == 1){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }
+    
+    public boolean Status(int id, String consult){
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement(consult + " ? ");
+            sql.setInt(1, id);
+            if(sql.executeUpdate() > 0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
+    }
+    
 }
