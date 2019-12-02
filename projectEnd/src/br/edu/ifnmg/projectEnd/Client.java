@@ -19,6 +19,7 @@ public class Client {
     private String neighborhood;
     private String street;
     private String number_house;
+    private int status;
 
     public Client(){
         this.id = 0;
@@ -30,6 +31,7 @@ public class Client {
         this.number_house = "";
         this.street = "";
         this.telephones = new ArrayList<String>();
+        this.status = 1;
     }
     
     public int getId(){
@@ -95,6 +97,16 @@ public class Client {
     public void setNumber(String newNumber){
         this.number_house = newNumber;
     }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    
+    
     
     public List<String> getTelephones() {
         return telephones;

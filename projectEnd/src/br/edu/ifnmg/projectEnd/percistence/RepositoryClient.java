@@ -25,7 +25,7 @@ public class RepositoryClient {
     public boolean Save(Client object){
         try{
             if(object.getId() == 0){
-                PreparedStatement sql = db.getConnection().prepareStatement("insert into client(name,cpf,email,street,number_house,neighborhood,sex) value(?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement sql = db.getConnection().prepareStatement("insert into client(name,cpf,email,street,number_house,neighborhood,sex,status) value(?,?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
                 sql.setString(1, object.getName());
                 sql.setString(2, object.getCpf().replace("-","").replace(".",""));
                 sql.setString(3, object.getEmail());
@@ -33,6 +33,7 @@ public class RepositoryClient {
                 sql.setString(5, object.getNumber_house());
                 sql.setString(6, object.getNeighborhood());
                 sql.setString(7, object.getSex().name());
+                sql.setInt(8, 1);
 
                 if (sql.executeUpdate() > 0){
                     ResultSet id = sql.getGeneratedKeys();
@@ -44,7 +45,7 @@ public class RepositoryClient {
                 }
                 
             }else{
-                PreparedStatement sql = db.getConnection().prepareStatement("update Client set name = ?, cpf = ?, email = ?, street = ?, number_house = ?, neighborhood = ?, sex = ? where id = ?");
+                PreparedStatement sql = db.getConnection().prepareStatement("update Client set name = ?, cpf = ?, email = ?, street = ?, number_house = ?, neighborhood = ?, sex = ?, status = ? where id = ?");
                 sql.setString(1, object.getName());
                 sql.setString(2, object.getCpf().replace("-","").replace(".",""));
                 sql.setString(3, object.getEmail());
@@ -52,7 +53,8 @@ public class RepositoryClient {
                 sql.setString(5, object.getNumber_house());
                 sql.setString(6, object.getNeighborhood());
                 sql.setString(7, object.getSex().name());
-                sql.setInt(8, object.getId());
+                sql.setInt(8, 1);
+                sql.setInt(9, object.getId());
                 
                 if(sql.executeUpdate() > 0){
                     return true;
@@ -282,7 +284,23 @@ public class RepositoryClient {
         return client;
     }
     
-    
+    public boolean CheckStatus(int id){
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement("select * from client where id = ?");
+            sql.setInt(1, id);
+            
+            ResultSet result = sql.executeQuery();
+            result.next();
+            if(result.getInt("status") == 1){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception ex){
+            System.out.println("client " + ex.getMessage());
+        }
+        return false;
+    }
     
 }
 

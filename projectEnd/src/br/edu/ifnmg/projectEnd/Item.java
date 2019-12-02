@@ -5,19 +5,21 @@
  */
 package br.edu.ifnmg.projectEnd;
 
+import java.math.BigDecimal;
+
 
 
 public class Item {
     private Product product;
     //A minha unidade deve ter uma enumeração
     private int amount;
-    private float value;
+    private BigDecimal value;
     
     public Item(){
         this.product = new Product();
         // Inicializar a unidade
         this.amount = 0;
-        this.value = 0;
+        this.value = new BigDecimal("0.0");
     }
     
     public Product getProduct(){
@@ -36,11 +38,11 @@ public class Item {
         this.amount = newAmount;
     }
     
-    public float getValue(){
+    public BigDecimal getValue(){
         return this.value;
     }
     
-    public void setValue(float newValue){
+    public void setValue(BigDecimal newValue){
         this.value = newValue;
     }
 }

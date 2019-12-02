@@ -14,6 +14,7 @@ import java.util.List;
 
 public class Sale {
     
+    private int id;
     private BigDecimal value_total;
     private List<Item> itens;
     private Date date;
@@ -23,13 +24,22 @@ public class Sale {
     //tem q ver como manipular o Date
     
     public Sale(){
-        this.value_total = new BigDecimal("0,0");
+        this.id = 0;
+        this.value_total = new BigDecimal("0.0");
         this.client = new Client();
         this.date = new Date();
         this.itens = new ArrayList<Item>();
         this.user = new User();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public User getUser() {
         return user;
     }
@@ -73,6 +83,12 @@ public class Sale {
             this.itens.remove(newItem);
     }
 
+    public List<Item> getItens() {
+        return itens;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "Sale{" + "value_total=" + value_total + ", itens=" + itens + ", date=" + date + ", client=" + client + ", user=" + user + '}';

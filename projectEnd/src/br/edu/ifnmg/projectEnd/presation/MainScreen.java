@@ -62,6 +62,11 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         btnSale.setText("Sale");
+        btnSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaleActionPerformed(evt);
+            }
+        });
 
         mmnUser.setText("User");
 
@@ -266,6 +271,12 @@ public class MainScreen extends javax.swing.JFrame {
         this.add(screen);
         screen.setVisible(true);
     }//GEN-LAST:event_btnPurchaseActionPerformed
+
+    private void btnSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaleActionPerformed
+        SaleProduct screen = new SaleProduct();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_btnSaleActionPerformed
 
     /**
      * @param args the command line arguments
