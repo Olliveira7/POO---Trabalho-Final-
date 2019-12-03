@@ -89,7 +89,7 @@ public class User {
     }
     
     public void addTelephone(String newTelephone){
-        if(newTelephone != null && newTelephone.length() == 11)
+        if(newTelephone != null && newTelephone.length() >= 11)
             this.telephones.add(newTelephone);
     }
     

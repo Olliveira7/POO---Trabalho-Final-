@@ -164,6 +164,29 @@ public class RepositoryClient {
         return null;
     }
     
+    public List<Client> OpenList(String consult){
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement(consult);
+            ResultSet result = sql.executeQuery();
+            List<Client> list = new ArrayList<>();
+            while(result.next()){
+                Client client = new Client();
+                client.setCpf(result.getString("cpf"));
+                client.setName(result.getString("name"));
+                client.setEmail(result.getString("email"));
+                client.setId(result.getInt("id"));
+                client.setNeighborhood(result.getString("neighborhood"));
+                client.setNumber(result.getString("number_house"));
+                client.setStreet(result.getString("street"));
+                list.add(client);
+            }
+            return list;
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+    
     public void SaveTelephone(Client client){
         try{
             PreparedStatement sql = db.getConnection().prepareStatement("delete from client_telephone client_fk = ?");
@@ -298,6 +321,20 @@ public class RepositoryClient {
             }
         }catch(Exception ex){
             System.out.println("client " + ex.getMessage());
+        }
+        return false;
+    }
+    
+    public boolean Status(String consult){
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement(consult);
+            if(sql.executeUpdate() > 0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception ex){
+            System.out.println("status client " + ex.getMessage());
         }
         return false;
     }

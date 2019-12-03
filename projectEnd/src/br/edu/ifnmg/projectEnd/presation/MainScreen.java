@@ -37,18 +37,25 @@ public class MainScreen extends javax.swing.JFrame {
         abaRegisterUser = new javax.swing.JMenuItem();
         btnSearchUser = new javax.swing.JMenuItem();
         abaDisable = new javax.swing.JMenuItem();
+        abaEnableUser = new javax.swing.JMenuItem();
+        abaEditUser = new javax.swing.JMenuItem();
         mmnClient = new javax.swing.JMenu();
         abaRegisterClient = new javax.swing.JMenuItem();
         abaSeacheClient = new javax.swing.JMenuItem();
+        abaDisableClient = new javax.swing.JMenuItem();
         mmnProduct = new javax.swing.JMenu();
         abaRegisterProduct = new javax.swing.JMenuItem();
         abaSearchProduct = new javax.swing.JMenuItem();
         abaDisableProduct = new javax.swing.JMenuItem();
         abaEnableProduct = new javax.swing.JMenuItem();
+        abaEditProduct = new javax.swing.JMenuItem();
         mmnProvider = new javax.swing.JMenu();
         abaRegisterProvider = new javax.swing.JMenuItem();
         abaDisableProvider = new javax.swing.JMenuItem();
         mmnStock = new javax.swing.JMenu();
+        abaStock = new javax.swing.JMenuItem();
+        mnuReports = new javax.swing.JMenu();
+        abaReports = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,6 +102,22 @@ public class MainScreen extends javax.swing.JFrame {
         });
         mmnUser.add(abaDisable);
 
+        abaEnableUser.setText("Enable User");
+        abaEnableUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaEnableUserActionPerformed(evt);
+            }
+        });
+        mmnUser.add(abaEnableUser);
+
+        abaEditUser.setText("Edit User");
+        abaEditUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaEditUserActionPerformed(evt);
+            }
+        });
+        mmnUser.add(abaEditUser);
+
         jMenuBar1.add(mmnUser);
 
         mmnClient.setText("Client");
@@ -114,6 +137,14 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
         mmnClient.add(abaSeacheClient);
+
+        abaDisableClient.setText("Disable Client");
+        abaDisableClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaDisableClientActionPerformed(evt);
+            }
+        });
+        mmnClient.add(abaDisableClient);
 
         jMenuBar1.add(mmnClient);
 
@@ -151,6 +182,14 @@ public class MainScreen extends javax.swing.JFrame {
         });
         mmnProduct.add(abaEnableProduct);
 
+        abaEditProduct.setText("Edit Product");
+        abaEditProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaEditProductActionPerformed(evt);
+            }
+        });
+        mmnProduct.add(abaEditProduct);
+
         jMenuBar1.add(mmnProduct);
 
         mmnProvider.setText("Provider");
@@ -174,7 +213,28 @@ public class MainScreen extends javax.swing.JFrame {
         jMenuBar1.add(mmnProvider);
 
         mmnStock.setText("Stock");
+
+        abaStock.setText("Stock");
+        abaStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaStockActionPerformed(evt);
+            }
+        });
+        mmnStock.add(abaStock);
+
         jMenuBar1.add(mmnStock);
+
+        mnuReports.setText("Reports");
+
+        abaReports.setText("Reports");
+        abaReports.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaReportsActionPerformed(evt);
+            }
+        });
+        mnuReports.add(abaReports);
+
+        jMenuBar1.add(mnuReports);
 
         setJMenuBar(jMenuBar1);
 
@@ -282,7 +342,7 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPurchaseActionPerformed
 
     private void btnSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaleActionPerformed
-        SaleProduct screen = new SaleProduct();
+        AuthenticateUserSale screen = new AuthenticateUserSale();
         this.add(screen);
         screen.setVisible(true);
     }//GEN-LAST:event_btnSaleActionPerformed
@@ -292,6 +352,42 @@ public class MainScreen extends javax.swing.JFrame {
         this.add(screen);
         screen.setVisible(true);
     }//GEN-LAST:event_abaDisableActionPerformed
+
+    private void abaEnableUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaEnableUserActionPerformed
+        EnableUser screen = new EnableUser();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_abaEnableUserActionPerformed
+
+    private void abaEditUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaEditUserActionPerformed
+        EditUser screen = new EditUser();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_abaEditUserActionPerformed
+
+    private void abaEditProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaEditProductActionPerformed
+        EditProduct screen = new EditProduct();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_abaEditProductActionPerformed
+
+    private void abaDisableClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaDisableClientActionPerformed
+        DisableClient screen = new DisableClient();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_abaDisableClientActionPerformed
+
+    private void abaStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaStockActionPerformed
+        StockProduct screen = new StockProduct();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_abaStockActionPerformed
+
+    private void abaReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaReportsActionPerformed
+        Reports screen = new Reports();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_abaReportsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -330,15 +426,21 @@ public class MainScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem abaDisable;
+    private javax.swing.JMenuItem abaDisableClient;
     private javax.swing.JMenuItem abaDisableProduct;
     private javax.swing.JMenuItem abaDisableProvider;
+    private javax.swing.JMenuItem abaEditProduct;
+    private javax.swing.JMenuItem abaEditUser;
     private javax.swing.JMenuItem abaEnableProduct;
+    private javax.swing.JMenuItem abaEnableUser;
     private javax.swing.JMenuItem abaRegisterClient;
     private javax.swing.JMenuItem abaRegisterProduct;
     private javax.swing.JMenuItem abaRegisterProvider;
     private javax.swing.JMenuItem abaRegisterUser;
+    private javax.swing.JMenuItem abaReports;
     private javax.swing.JMenuItem abaSeacheClient;
     private javax.swing.JMenuItem abaSearchProduct;
+    private javax.swing.JMenuItem abaStock;
     private javax.swing.JButton btnPurchase;
     private javax.swing.JButton btnSale;
     private javax.swing.JMenuItem btnSearchUser;
@@ -349,5 +451,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenu mmnProvider;
     private javax.swing.JMenu mmnStock;
     private javax.swing.JMenu mmnUser;
+    private javax.swing.JMenu mnuReports;
     // End of variables declaration//GEN-END:variables
 }

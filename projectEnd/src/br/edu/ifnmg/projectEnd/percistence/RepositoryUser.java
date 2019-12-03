@@ -43,12 +43,13 @@ public class RepositoryUser {
                 }
                 
             }else{
-                PreparedStatement sql = db.getConnection().prepareStatement("update Client set name = ?, cpf = ?, password = ?, sex = ?, user = ?");
+                PreparedStatement sql = db.getConnection().prepareStatement("update user set name = ?, cpf = ?, password = ?, sex = ?, user = ? where id = ?");
                 sql.setString(1, objeto.getName());
                 sql.setString(2, objeto.getCpf().replace("-","").replace(".",""));
                 sql.setString(3, objeto.getPassword());
                 sql.setString(4, objeto.getSex().name());
                 sql.setString(5, objeto.getUser());
+                sql.setInt(6, objeto.getId());
                 
                 if(sql.executeUpdate() > 0)
                     return true;

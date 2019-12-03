@@ -6,6 +6,7 @@
 package br.edu.ifnmg.projectEnd.presation;
 
 import br.edu.ifnmg.projectEnd.Client;
+import br.edu.ifnmg.projectEnd.ExceptionValidationError;
 import br.edu.ifnmg.projectEnd.Sex;
 import br.edu.ifnmg.projectEnd.percistence.RepositoryClient;
 import javax.swing.DefaultComboBoxModel;
@@ -28,13 +29,27 @@ public class RegisterClient extends javax.swing.JInternalFrame {
     }
 
     public void setClient(){
-        this.client.setName(txtName.getText());
-        this.client.setCpf(txtCpf.getText());
-        this.client.setEmail(txtEmail.getText());
-        this.client.setNeighborhood(txtNeighborhood.getText());
-        this.client.setNumber(txtNumberHouse.getText());
-        this.client.setStreet(txtStreet.getText());
-        this.client.setSex(Sex.valueOf(cbxSex.getSelectedItem().toString()));
+        try{
+            this.client.setName(txtName.getText());
+            this.client.setCpf(txtCpf.getText());
+            this.client.setEmail(txtEmail.getText());
+            this.client.setNeighborhood(txtNeighborhood.getText());
+            this.client.setNumber(txtNumberHouse.getText());
+            this.client.setStreet(txtStreet.getText());
+            this.client.setSex(Sex.valueOf(cbxSex.getSelectedItem().toString()));
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Cpf or Email invalid");
+        }
+    }
+    
+    public void setNull(){
+        this.txtCpf.setText("");
+        this.txtEmail.setText("");
+        this.txtName.setText("");
+        this.txtNeighborhood.setText("");
+        this.txtNumberHouse.setText("");
+        this.txtStreet.setText("");
+        this.txtTelephone.setText("");
     }
     
     public void UpdatePhone(){
@@ -42,6 +57,11 @@ public class RegisterClient extends javax.swing.JInternalFrame {
         telephone = client.getTelephones().toArray(telephone);
         ListModel<String> Telephones = new DefaultComboBoxModel<>(telephone);
         tblTelephones.setModel(Telephones);
+    }
+    
+    public void setNullTable(){
+        ListModel<String> a = new DefaultComboBoxModel<>();
+        tblTelephones.setModel(a);
     }
     
     
@@ -312,10 +332,13 @@ public class RegisterClient extends javax.swing.JInternalFrame {
                 clientTeste = this.repository.CheckClient(client);
                 if(clientTeste == null){
                     if( JOptionPane.showConfirmDialog(null, "Do you really want to save changes?", "Confirm", JOptionPane.YES_NO_OPTION) == 0){
-                        if(this.repository.Save(client)){
-                            repository.SaveTelephone(client);
+                        if(this.repository.Save(client) == true){
+                            if(client.getTelephones() != null)
+                                repository.SaveTelephone(client);
+                            setNull();
+                            setNullTable();
+                            client = new Client();
                             JOptionPane.showMessageDialog(null, "Saved Client!");
-                            this.dispose();
                         }
                     }
                 }else{
