@@ -298,7 +298,6 @@ public class RegisterProvider extends javax.swing.JInternalFrame {
                         try{
                             setSaveProvider();
                             this.repository.Save(this.provider);
-                            System.out.println(provider.getId());
                             if(provider.getTelephones().size() != 0)
                                 this.repository.SaveTelephone(provider);
                             setNull();

@@ -29,7 +29,7 @@ public class RepositoryProvider {
             if(object.getId() == 0){
                 PreparedStatement sql = db.getConnection().prepareStatement("insert into provider(name,cnpj,reason_social,street,number_provider,neighborhood,status,email) values(?,?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
                 sql.setString(1, object.getName());
-                sql.setString(2, object.getCnpj());
+                sql.setString(2, object.getCnpj().replace("-", "").replace("/", "").replace(".", ""));
                 sql.setString(3, object.getReason_social());
                 sql.setString(4, object.getStreet());
                 sql.setString(5, object.getNumber_providor());
@@ -218,9 +218,9 @@ public class RepositoryProvider {
             
             while(result.next()){
                 Provider provider = new Provider();
-                String cnpj = result.getString("cnpj");   
+                String tex = result.getString("cnpj");
                 try{
-                    provider.setCnpj(cnpj);
+                    provider.setCnpj(result.getString("cnpj"));
                     provider.setId(result.getInt("id"));
                     provider.setEmail(result.getString("email"));
                     provider.setName(result.getString("name"));
@@ -230,14 +230,14 @@ public class RepositoryProvider {
                     provider.setStreet(result.getString("street"));
                 }catch(SQLException ex){
                     provider = null;
-                    System.out.println("Opem List: " + ex.getMessage());
+                    System.out.println("Open List: " + ex.getMessage());
                 }
                 providers.add(provider);
                 
             }
             return providers;
         }catch(Exception ex){
-            System.out.println(ex.getMessage());
+            System.out.println("Save provider " + ex.getMessage());
         }
         return null;
     }

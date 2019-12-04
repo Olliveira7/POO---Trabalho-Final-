@@ -23,7 +23,8 @@ public class Provider {
     private String email;
     private int status;
     
-    private Pattern regex_cnpj = Pattern.compile("\\d{2}\\.?\\d{3}\\.?\\d{3}\\/?\\d{4}\\-\\d{2}");
+    private Pattern regex_cnpj = Pattern.compile("\\d{2}\\.?\\d{3}\\.?\\d{3}\\/?\\d{4}\\-?\\d{2}");
+    private Pattern regex_email = Pattern.compile("\\w{*}\\@\\w{*}\\.\\w{*}");
     
     public Provider(){
         this.id = 0;
@@ -71,15 +72,19 @@ public class Provider {
     }
     
     public String getCnpj(){
-        return  this.cnpj;
+        return  this.cnpj.substring(0, 2) + "." 
+                + cnpj.substring(2, 5) + "." 
+                + cnpj.substring(5, 8) + "/" 
+                + cnpj.substring(8, 12) + "-" 
+                + cnpj.substring(12, 14);
     }
     
     public void setCnpj(String newCnpj)throws ExceptionValidationError {
         Matcher m = regex_cnpj.matcher(newCnpj);
         if(m.matches())
-            this.cnpj = newCnpj;
+            this.cnpj = newCnpj.replace(".", "").replace("-", "").replace("/", "");
         else
-            throw new ExceptionValidationError("CPF Inválido!");
+            throw new ExceptionValidationError("CNPJ Inválido!");
     }
     
     public String getEmail(){

@@ -63,9 +63,12 @@ public class SearchProvider extends javax.swing.JInternalFrame {
         btnSearchDisable = new javax.swing.JButton();
 
         setClosable(true);
+        setForeground(java.awt.Color.lightGray);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Search Provider");
+        setOpaque(true);
 
         tblProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
