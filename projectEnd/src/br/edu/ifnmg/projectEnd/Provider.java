@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package br.edu.ifnmg.projectEnd;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Provider {
@@ -21,6 +22,8 @@ public class Provider {
     private String number_provider;
     private String email;
     private int status;
+    
+    private Pattern regex_cnpj = Pattern.compile("\\d{2}\\.?\\d{3}\\.?\\d{3}\\/?\\d{4}\\-\\d{2}");
     
     public Provider(){
         this.id = 0;
@@ -68,11 +71,15 @@ public class Provider {
     }
     
     public String getCnpj(){
-        return this.cnpj;
+        return  this.cnpj;
     }
     
-    public void setCnpj(String newCnpj){
-        this.cnpj = newCnpj;
+    public void setCnpj(String newCnpj)throws ExceptionValidationError {
+        Matcher m = regex_cnpj.matcher(newCnpj);
+        if(m.matches())
+            this.cnpj = newCnpj;
+        else
+            throw new ExceptionValidationError("CPF Inválido!");
     }
     
     public String getEmail(){

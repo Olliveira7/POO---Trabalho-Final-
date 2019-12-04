@@ -118,9 +118,13 @@ public class LoginScreen extends javax.swing.JFrame {
             if(user == null){
                 JOptionPane.showMessageDialog(null, "The data is wrong");
             }else{//Nessa parte eu vou mostrar a próxima tela e tirar a anterior
-                MainScreen main = new MainScreen();
-                main.setVisible(true);
-                this.setVisible(false);
+                if(user.getStatus() == 1){
+                    MainScreen main = new MainScreen();
+                    main.setVisible(true);
+                    this.setVisible(false);
+                }else{
+                    JOptionPane.showMessageDialog(null, "User disabled");
+                }
             }
         }
     }//GEN-LAST:event_btnLoginActionPerformed

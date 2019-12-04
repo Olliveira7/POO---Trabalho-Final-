@@ -164,6 +164,24 @@ public class RepositoryClient {
         return null;
     }
     
+    public List<String> OpenListTelephone(int id){
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement("select * from client_telephone where client_fk = ?");
+            sql.setInt(1, id);
+            ResultSet result = sql.executeQuery();
+            List<String> telephones = new ArrayList<>();
+            while(result.next()){
+                String telephone = "";
+                telephone = result.getString("telephone");
+                telephones.add(telephone);
+            }
+            return telephones;
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+    
     public List<Client> OpenList(String consult){
         try{
             PreparedStatement sql = db.getConnection().prepareStatement(consult);
@@ -258,6 +276,7 @@ public class RepositoryClient {
                 client.setNumber(result.getString("number_house"));
                 client.setSex(Sex.valueOf(result.getString("sex")));
                 client.setStreet(result.getString("street"));
+                client.setId(result.getInt("id"));
                 return client;
             }
             

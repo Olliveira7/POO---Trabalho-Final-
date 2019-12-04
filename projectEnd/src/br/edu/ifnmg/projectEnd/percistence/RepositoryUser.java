@@ -182,6 +182,7 @@ public class RepositoryUser {
                 user.setPassword(resul.getString("password"));
                 user.setSex(Sex.valueOf(resul.getString("sex")));
                 user.setUser(resul.getString("user"));
+                user.setStatus(resul.getInt("status"));
                 return user;
             }
         }catch(SQLException ex){

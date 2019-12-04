@@ -16,7 +16,7 @@ public class Database {
     public Database(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/job","teste","victoriagabriella1999");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/poo_job","teste","victoriagabriella1999");
         }catch(ClassNotFoundException ex){
             System.out.println("Driver não conectou com o banco de dados " + ex.getMessage());
         }catch(SQLException ex){
