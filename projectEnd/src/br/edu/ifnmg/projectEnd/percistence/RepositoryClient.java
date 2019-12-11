@@ -253,7 +253,7 @@ public class RepositoryClient {
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }
-        return client;
+        return client = null;
     }
     
     public Client CheckClientId(Client filtro){

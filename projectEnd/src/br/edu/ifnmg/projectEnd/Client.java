@@ -8,6 +8,8 @@ package br.edu.ifnmg.projectEnd;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Client {
     private int id;
@@ -21,6 +23,8 @@ public class Client {
     private String number_house;
     private int status;
 
+    private Pattern regex_cpf = Pattern.compile("\\d{3}\\.?\\d{3}\\.?\\d{3}\\-?\\d{2}");
+    
     public Client(){
         this.id = 0;
         this.name = "";
@@ -51,11 +55,18 @@ public class Client {
     }
     
     public String getCpf(){
-        return this.cpf;
+        return  cpf.substring(0, 3)+"."+
+                cpf.substring(3, 6)+"."+
+                cpf.substring(6, 9)+"-"+
+                cpf.substring(9, 11);
     }
     
-    public void setCpf(String newCpf){
-        this.cpf = newCpf;
+    public void setCpf(String newCpf) throws ExceptionValidationError{
+        Matcher m = regex_cpf.matcher(newCpf);
+        if(m.matches())
+            this.cpf = newCpf.replace(".", "").replace("-", "");
+        else
+            throw new ExceptionValidationError("CPF Inválido!");
     }
     
     public String getEmail(){
