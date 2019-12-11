@@ -25,15 +25,14 @@ public class RepositoryClient {
     public boolean Save(Client object){
         try{
             if(object.getId() == 0){
-                PreparedStatement sql = db.getConnection().prepareStatement("insert into client(name,cpf,email,street,number_house,neighborhood,sex,status) value(?,?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement sql = db.getConnection().prepareStatement("insert into client(name,cpf,street,number_house,neighborhood,sex,status) value(?,?,?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
                 sql.setString(1, object.getName());
                 sql.setString(2, object.getCpf().replace("-","").replace(".",""));
-                sql.setString(3, object.getEmail());
-                sql.setString(4, object.getStreet());
-                sql.setString(5, object.getNumber_house());
-                sql.setString(6, object.getNeighborhood());
-                sql.setString(7, object.getSex().name());
-                sql.setInt(8, 1);
+                sql.setString(3, object.getStreet());
+                sql.setString(4, object.getNumber_house());
+                sql.setString(5, object.getNeighborhood());
+                sql.setString(6, object.getSex().name());
+                sql.setInt(7, 1);
 
                 if (sql.executeUpdate() > 0){
                     ResultSet id = sql.getGeneratedKeys();
@@ -45,16 +44,15 @@ public class RepositoryClient {
                 }
                 
             }else{
-                PreparedStatement sql = db.getConnection().prepareStatement("update Client set name = ?, cpf = ?, email = ?, street = ?, number_house = ?, neighborhood = ?, sex = ?, status = ? where id = ?");
+                PreparedStatement sql = db.getConnection().prepareStatement("update Client set name = ?, cpf = ?, street = ?, number_house = ?, neighborhood = ?, sex = ?, status = ? where id = ?");
                 sql.setString(1, object.getName());
                 sql.setString(2, object.getCpf().replace("-","").replace(".",""));
-                sql.setString(3, object.getEmail());
-                sql.setString(4, object.getStreet());
-                sql.setString(5, object.getNumber_house());
-                sql.setString(6, object.getNeighborhood());
-                sql.setString(7, object.getSex().name());
-                sql.setInt(8, 1);
-                sql.setInt(9, object.getId());
+                sql.setString(3, object.getStreet());
+                sql.setString(4, object.getNumber_house());
+                sql.setString(5, object.getNeighborhood());
+                sql.setString(6, object.getSex().name());
+                sql.setInt(7, 1);
+                sql.setInt(8, object.getId());
                 
                 if(sql.executeUpdate() > 0){
                     return true;
@@ -82,7 +80,6 @@ public class RepositoryClient {
             try{
                 client.setCpf(result.getString("cpf"));
                 client.setName(result.getString("name"));
-                client.setEmail(result.getString("email"));
                 client.setId(result.getInt("id"));
                 client.setNeighborhood(result.getString("neighborhood"));
                 client.setNumber(result.getString("number_house"));
@@ -146,7 +143,6 @@ public class RepositoryClient {
                 try{
                     client.setCpf(result.getString("cpf"));
                     client.setName(result.getString("name"));
-                    client.setEmail(result.getString("email"));
                     client.setId(result.getInt("id"));
                     client.setNeighborhood(result.getString("neighborhood"));
                     client.setNumber(result.getString("number_house"));
@@ -182,6 +178,24 @@ public class RepositoryClient {
         return null;
     }
     
+    public List<String> OpenListEmail(int id){
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement("select * from client_email where client_fk = ?");
+            sql.setInt(1, id);
+            ResultSet result = sql.executeQuery();
+            List<String> emails = new ArrayList<>();
+            while(result.next()){
+                String email = "";
+                email = result.getString("email");
+                emails.add(email);
+            }
+            return emails;
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
+    
     public List<Client> OpenList(String consult){
         try{
             PreparedStatement sql = db.getConnection().prepareStatement(consult);
@@ -191,7 +205,6 @@ public class RepositoryClient {
                 Client client = new Client();
                 client.setCpf(result.getString("cpf"));
                 client.setName(result.getString("name"));
-                client.setEmail(result.getString("email"));
                 client.setId(result.getInt("id"));
                 client.setNeighborhood(result.getString("neighborhood"));
                 client.setNumber(result.getString("number_house"));
@@ -207,10 +220,11 @@ public class RepositoryClient {
     
     public void SaveTelephone(Client client){
         try{
-            PreparedStatement sql = db.getConnection().prepareStatement("delete from client_telephone client_fk = ?");
+            PreparedStatement sql = db.getConnection().prepareStatement("delete from client_telephone where client_fk = ?");
             
             sql.setInt(1, client.getId());
-            
+            sql.executeUpdate();
+
             String values = "";
             for(String telephone : client.getTelephones()){
                 if(values.length() > 0) 
@@ -222,6 +236,29 @@ public class RepositoryClient {
             Statement sql2 = db.getConnection().createStatement();
             
             sql2.executeUpdate("insert into client_telephone(client_fk, telephone) VALUES " + values);
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    public void SaveEmail(Client client){
+        try{
+            PreparedStatement sql = db.getConnection().prepareStatement("delete from client_email where client_fk = ?");
+            
+            sql.setInt(1, client.getId());
+            sql.executeUpdate();
+            
+            String values = "";
+            for(String email : client.getEmail()){
+                if(values.length() > 0) 
+                    values += ", ";
+                
+                values += "("+client.getId()+",'"+email+"')";
+            }
+            
+            Statement sql2 = db.getConnection().createStatement();
+            
+            sql2.executeUpdate("insert into client_email(client_fk, email) VALUES " + values);
         }catch(Exception ex){
             System.out.println(ex.getMessage());
         }
@@ -243,7 +280,6 @@ public class RepositoryClient {
             }else{
                 client.setCpf(result.getString("cpf"));
                 client.setName(result.getString("name"));
-                client.setEmail(result.getString("email"));
                 client.setNeighborhood(result.getString("neighborhood"));
                 client.setNumber(result.getString("number_house"));
                 client.setSex(Sex.valueOf(result.getString("sex")));
@@ -271,7 +307,6 @@ public class RepositoryClient {
             }else{
                 client.setCpf(result.getString("cpf"));
                 client.setName(result.getString("name"));
-                client.setEmail(result.getString("email"));
                 client.setNeighborhood(result.getString("neighborhood"));
                 client.setNumber(result.getString("number_house"));
                 client.setSex(Sex.valueOf(result.getString("sex")));

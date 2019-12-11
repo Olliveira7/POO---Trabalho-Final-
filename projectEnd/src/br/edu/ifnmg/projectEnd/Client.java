@@ -15,7 +15,7 @@ public class Client {
     private int id;
     private String name;
     private String cpf;
-    private String email;
+    private List<String> email;
     private Sex sex;
     private List<String> telephones;
     private String neighborhood;
@@ -29,7 +29,7 @@ public class Client {
         this.id = 0;
         this.name = "";
         this.cpf = "";
-        this.email = "";
+        this.email = new ArrayList<String>();
         this.sex = Sex.F;
         this.neighborhood = "";
         this.number_house = "";
@@ -69,13 +69,10 @@ public class Client {
             throw new ExceptionValidationError("CPF Inválido!");
     }
     
-    public String getEmail(){
+    public List<String> getEmail(){
         return this.email;
     }
     
-    public void setEmail(String newEmail){
-        this.email = newEmail;
-    }
     
     public Sex getSex() {
         return sex;
@@ -117,14 +114,20 @@ public class Client {
         this.status = status;
     }
     
+    public void addEmail(String newEmail){
+        if(newEmail != null){
+            this.email.add(newEmail);
+        }
+    }
     
+    public void removeEmail(String newEmail){
+        if(this.email.contains(newEmail)){
+            this.email.remove(newEmail);
+        }
+    }
     
     public List<String> getTelephones() {
         return telephones;
-    }
-
-    public void setTelephones(List<String> telephones) {
-        this.telephones = telephones;
     }
     
     public void addTelephone(String telephone)throws Exception{

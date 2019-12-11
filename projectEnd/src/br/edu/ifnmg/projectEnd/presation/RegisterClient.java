@@ -32,7 +32,6 @@ public class RegisterClient extends javax.swing.JInternalFrame {
         try{
             this.client.setName(txtName.getText());
             this.client.setCpf(txtCpf.getText());
-            this.client.setEmail(txtEmail.getText());
             this.client.setNeighborhood(txtNeighborhood.getText());
             this.client.setNumber(txtNumberHouse.getText());
             this.client.setStreet(txtStreet.getText());
@@ -59,9 +58,18 @@ public class RegisterClient extends javax.swing.JInternalFrame {
         tblTelephones.setModel(Telephones);
     }
     
+    public void UpdateEmail(){
+        String[] email = new String[client.getEmail().size()];
+        email = client.getEmail().toArray(email);
+        ListModel<String> Emails = new DefaultComboBoxModel<>(email);
+        this.tblEmail.setModel(Emails);
+    }
+    
     public void setNullTable(){
         ListModel<String> a = new DefaultComboBoxModel<>();
         tblTelephones.setModel(a);
+        ListModel<String> b = new DefaultComboBoxModel<>();
+        tblEmail.setModel(b);
     }
     
     
@@ -99,6 +107,10 @@ public class RegisterClient extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTelephones = new javax.swing.JList<>();
         jLabel7 = new javax.swing.JLabel();
+        btnAddEmail = new javax.swing.JButton();
+        btnRemoveEmail = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblEmail = new javax.swing.JList<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -189,6 +201,27 @@ public class RegisterClient extends javax.swing.JInternalFrame {
 
         jLabel7.setText("***.***.***-**");
 
+        btnAddEmail.setText("Add");
+        btnAddEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddEmailActionPerformed(evt);
+            }
+        });
+
+        btnRemoveEmail.setText("Remove");
+        btnRemoveEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveEmailActionPerformed(evt);
+            }
+        });
+
+        tblEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEmailMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblEmail);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -205,7 +238,7 @@ public class RegisterClient extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(labelSex)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxSex, 0, 47, Short.MAX_VALUE))
+                                .addComponent(cbxSex, 0, 1, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -223,17 +256,13 @@ public class RegisterClient extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(jLabel1)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(jLabel6)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel6))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
@@ -250,7 +279,15 @@ public class RegisterClient extends javax.swing.JInternalFrame {
                                     .addComponent(btnAdd)
                                     .addGap(43, 43, 43)
                                     .addComponent(btnRemove)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(40, 40, 40)
+                                    .addComponent(btnAddEmail)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnRemoveEmail))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -269,11 +306,7 @@ public class RegisterClient extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNeighborhood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -292,7 +325,16 @@ public class RegisterClient extends javax.swing.JInternalFrame {
                     .addComponent(btnRemove))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddEmail)
+                    .addComponent(btnRemoveEmail))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave)
                     .addComponent(btnCancel))
@@ -329,8 +371,14 @@ public class RegisterClient extends javax.swing.JInternalFrame {
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         if(!txtTelephone.getText().isEmpty()){
-            this.client.removeTelephone(txtTelephone.getText());
+            if(client.getTelephones().size() > 0){
+                this.client.removeTelephone(txtTelephone.getText());
+            }else{
+                JOptionPane.showMessageDialog(null, "Este telefone não está cadastrado!");
+            }
             txtTelephone.setText("");
+        }else{
+            JOptionPane.showMessageDialog(null, "Para remover este telephone precisa selecionalo ou digitalo campo telephone");
         }
         UpdatePhone();
     }//GEN-LAST:event_btnRemoveActionPerformed
@@ -344,15 +392,19 @@ public class RegisterClient extends javax.swing.JInternalFrame {
                 setClient();
                 clientTeste = this.repository.CheckClient(client);
                 if(clientTeste == null){
-                    if( JOptionPane.showConfirmDialog(null, "Do you really want to save changes?", "Confirm", JOptionPane.YES_NO_OPTION) == 0){
+                    if(!client.getCpf().isEmpty()){
+                        if( JOptionPane.showConfirmDialog(null, "Do you really want to save changes?", "Confirm", JOptionPane.YES_NO_OPTION) == 0){
                         if(this.repository.Save(client) == true){
-                            if(client.getTelephones() != null)
+                            if(client.getTelephones().size() > 0)
                                 repository.SaveTelephone(client);
+                            if(client.getEmail().size() > 0)
+                                repository.SaveEmail(client);
                             setNull();
                             setNullTable();
                             client = new Client();
                             JOptionPane.showMessageDialog(null, "Saved Client!");
                         }
+                    }
                     }
                 }else{
                     JOptionPane.showMessageDialog(null, "Existing Client!");  
@@ -381,11 +433,39 @@ public class RegisterClient extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCpfActionPerformed
 
+    private void tblEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmailMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblEmailMouseClicked
+
+    private void btnAddEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmailActionPerformed
+        if(!txtEmail.getText().isEmpty()){
+            this.client.addEmail(txtEmail.getText());
+            UpdateEmail();
+        }
+        txtEmail.setText("");
+    }//GEN-LAST:event_btnAddEmailActionPerformed
+
+    private void btnRemoveEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveEmailActionPerformed
+        if(!txtEmail.getText().isEmpty()){
+            if(client.getEmail().size() > 0){
+                this.client.removeEmail(txtEmail.getText());
+                UpdateEmail();
+            }else{
+                JOptionPane.showMessageDialog(null, "Email não adcionado!");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Não existe email!");
+        }
+        txtEmail.setText("");
+    }//GEN-LAST:event_btnRemoveEmailActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnAddEmail;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnRemove;
+    private javax.swing.JButton btnRemoveEmail;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cbxSex;
     private javax.swing.JLabel jLabel1;
@@ -397,9 +477,11 @@ public class RegisterClient extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelName;
     private javax.swing.JLabel labelSex;
     private javax.swing.JLabel labelTelephones;
+    private javax.swing.JList<String> tblEmail;
     private javax.swing.JList<String> tblTelephones;
     private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtEmail;
