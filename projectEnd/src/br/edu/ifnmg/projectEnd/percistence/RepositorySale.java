@@ -92,4 +92,36 @@ public class RepositorySale {
         return null;
     }
     
+    public List<Sale> OpenListId(int id, int check){
+        try{
+            RepositoryProduct repositoryProduct = new RepositoryProduct();
+            RepositoryClient repositoryClient = new RepositoryClient();
+            RepositoryUser repositoryUser = new RepositoryUser();
+            String consult = new String();
+            if(check == 1){
+                consult = "select * from sale where client_fk = ?";
+            }
+            if(check == 2){
+                consult = "select * from sale where user_fk = ?";
+            }
+            PreparedStatement sql = db.getConnection().prepareStatement(consult);
+            sql.setInt(1, id);
+            ResultSet result = sql.executeQuery();
+            List<Sale> sales = new ArrayList<>();
+            while(result.next()){
+                Sale sale = new Sale();
+                sale.setDate(result.getDate("date"));
+                sale.setId(result.getInt("id"));
+                sale.setClient(repositoryClient.Open(result.getInt("client_fk")));
+                sale.setUser(repositoryUser.Open(result.getInt("user_fk")));
+                sale.setValue_total(result.getBigDecimal("value_total"));
+                sales.add(sale);
+            }
+            return sales;
+        }catch(Exception ex){
+            System.out.println("problemas com o purchase: " + ex.getMessage());
+        }
+        return null;
+    }
+    
 }

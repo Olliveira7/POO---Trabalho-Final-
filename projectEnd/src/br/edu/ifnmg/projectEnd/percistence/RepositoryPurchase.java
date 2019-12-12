@@ -8,6 +8,7 @@ package br.edu.ifnmg.projectEnd.percistence;
 import br.edu.ifnmg.projectEnd.ItemProvider;
 import br.edu.ifnmg.projectEnd.Provider;
 import br.edu.ifnmg.projectEnd.Purchase;
+import br.edu.ifnmg.projectEnd.Sale;
 import br.edu.ifnmg.projectEnd.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -77,6 +78,38 @@ public class RepositoryPurchase {
             RepositoryProvider repositoryProvider = new RepositoryProvider();
             RepositoryUser repositoryUser = new RepositoryUser();
             PreparedStatement sql = db.getConnection().prepareStatement("select * from purchase");
+            ResultSet result = sql.executeQuery();
+            List<Purchase> purchases = new ArrayList<>();
+            while(result.next()){
+                Purchase purchase = new Purchase();
+                purchase.setDate(result.getDate("date"));
+                purchase.setId(result.getInt("id"));
+                purchase.setProvider(repositoryProvider.Open(result.getInt("provider_fk")));
+                purchase.setUser(repositoryUser.Open(result.getInt("user_fk")));
+                purchase.setValue_total(result.getBigDecimal("value_total"));
+                purchases.add(purchase);
+            }
+            return purchases;
+        }catch(Exception ex){
+            System.out.println("problemas com o purchase: " + ex.getMessage());
+        }
+        return null;
+    }
+    
+    public List<Purchase> OpenListId(int id, int check){
+        try{
+            RepositoryProduct repositoryProduct = new RepositoryProduct();
+            RepositoryProvider repositoryProvider = new RepositoryProvider();
+            RepositoryUser repositoryUser = new RepositoryUser();
+            String consult = new String();
+            if(check == 1){
+                consult = "select * from purchase where provider_fk = ?";
+            }
+            if(check == 2){
+                consult = "select * from purchase where user_fk = ?";
+            }
+            PreparedStatement sql = db.getConnection().prepareStatement(consult);
+            sql.setInt(1, id);
             ResultSet result = sql.executeQuery();
             List<Purchase> purchases = new ArrayList<>();
             while(result.next()){

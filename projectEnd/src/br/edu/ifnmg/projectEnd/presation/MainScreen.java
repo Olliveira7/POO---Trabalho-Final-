@@ -60,6 +60,7 @@ public class MainScreen extends javax.swing.JFrame {
         abaStock = new javax.swing.JMenuItem();
         mnuReports = new javax.swing.JMenu();
         abaReports = new javax.swing.JMenuItem();
+        abaIndividualReports = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -270,6 +271,14 @@ public class MainScreen extends javax.swing.JFrame {
         });
         mnuReports.add(abaReports);
 
+        abaIndividualReports.setText("Individual Report ");
+        abaIndividualReports.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abaIndividualReportsActionPerformed(evt);
+            }
+        });
+        mnuReports.add(abaIndividualReports);
+
         jMenuBar1.add(mnuReports);
 
         setJMenuBar(jMenuBar1);
@@ -449,6 +458,12 @@ public class MainScreen extends javax.swing.JFrame {
         screen.setVisible(true);
     }//GEN-LAST:event_abaEditeClientActionPerformed
 
+    private void abaIndividualReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abaIndividualReportsActionPerformed
+        IndividualReport screen = new IndividualReport();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_abaIndividualReportsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -496,6 +511,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JMenuItem abaEnableProduct;
     private javax.swing.JMenuItem abaEnableProvider;
     private javax.swing.JMenuItem abaEnableUser;
+    private javax.swing.JMenuItem abaIndividualReports;
     private javax.swing.JMenuItem abaRegisterClient;
     private javax.swing.JMenuItem abaRegisterProduct;
     private javax.swing.JMenuItem abaRegisterProvider;
